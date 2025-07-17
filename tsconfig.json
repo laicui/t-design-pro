@@ -15,7 +15,7 @@
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": false,
     "paths": {
-      "t-design-pro": ["./src/index.ts"],
+      "t-design-pro": ["src/index.ts"],
       "@/*": ["src/*"]
     },
     /* Linting */
