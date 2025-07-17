@@ -27,6 +27,7 @@
     "@surely-vue/table": "^5.0.4",
     "@types/node": "^24.0.14",
     "@vue/language-core": "^3.0.1",
+    "@vueuse/core": "^13.5.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-prettier": "^5.5.1",
     "eslint-plugin-simple-import-sort": "^12.1.1",
