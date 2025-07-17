@@ -1,0 +1,7 @@
+{
+  "semi": false,
+  "singleQuote": true,
+  "experimentalTernaries": false,
+  "trailingComma": "none",
+  "printWidth": 100
+}
