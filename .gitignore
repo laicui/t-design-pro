@@ -7,4 +7,4 @@ dist
 logs
 node_modules
 temp
-.vitepress
+cache
