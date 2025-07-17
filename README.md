@@ -2,7 +2,7 @@
 
 基于 TDesign 的 Vue 3 高阶组件库
 
-[查看在线文档](https://www.baidu.com)
+[查看在线文档](https://laicui.github.io/t-design-pro/)
 
 ## 安装
 
