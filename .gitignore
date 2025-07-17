@@ -3,8 +3,9 @@
 .idea
 *.log
 *.tgz
-dist
 logs
 node_modules
 temp
 cache
+/dist
+!.vitepress/dist
