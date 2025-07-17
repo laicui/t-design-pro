@@ -6,6 +6,7 @@ const r = (path: string) => fileURLToPath(new URL(path, import.meta.url))
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  base: '/t-design-pro/',
   title: 't-design-pro',
   description: 'A VitePress Site',
   vite: {
