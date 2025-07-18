@@ -14,6 +14,9 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": false,
+    /* JSX Support */
+    "jsx": "preserve",
+    "jsxImportSource": "vue",
     "paths": {
       "t-design-pro": ["src/index.ts"],
       "@/*": ["src/*"]
@@ -25,5 +28,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue", "docs"]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.d.ts", "src/**/*.vue", "src/vite-env.d.ts", "docs"]
 }

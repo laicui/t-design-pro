@@ -2,6 +2,7 @@ import { resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import vue from '@vitejs/plugin-vue'
+import vueJsx from '@vitejs/plugin-vue-jsx'
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 
@@ -10,6 +11,7 @@ const r = (path: string) => fileURLToPath(new URL(path, import.meta.url))
 export default defineConfig({
   plugins: [
     vue(),
+    vueJsx(),
     dts({
       entryRoot: 'src',
       include: ['src/components/**/*', 'src/index.ts'],
@@ -33,6 +35,7 @@ export default defineConfig({
     rollupOptions: {
       external: ['vue', 'tdesign-vue-next'],
       output: {
+        exports: 'named',
         // https://rollupjs.org/configuration-options/#output-assetfilenames
         assetFileNames: (assetInfo) => {
           const name = assetInfo.names[0]

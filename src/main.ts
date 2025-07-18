@@ -1,4 +1,3 @@
-import './style.css'
 import 'tdesign-vue-next/es/style/index.css'
 
 import TDesign from 'tdesign-vue-next'

@@ -71,7 +71,8 @@ import { getInitSearchFormData } from './utils.ts'
 // =====================================================================================
 // 初始化相关
 defineOptions({
-  inheritAttrs: false
+  inheritAttrs: false,
+  name: 'TablePro'
 })
 
 const slots = useSlots()
