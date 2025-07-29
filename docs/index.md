@@ -9,10 +9,7 @@ hero:
   actions:
     - theme: brand
       text: 快速开始
-      link: /quickStart/install
-    - theme: alt
-      text: 查看组件
-      link: /base/button/
+      link: /quickStart
 
 features:
   - title: Typescript
