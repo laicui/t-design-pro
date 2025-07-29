@@ -5,10 +5,8 @@
 </template>
 
 <script setup lang="ts">
-import { TablePro } from 't-design-pro'
+import { type ProTableCol, TablePro } from 't-design-pro'
 import { ref } from 'vue'
-
-import { ProTableCol } from '@/components/Table/types'
 
 const columns = ref<ProTableCol[]>([
   {

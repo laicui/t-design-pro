@@ -35,4 +35,5 @@ const TDesignPro = {
 }
 
 export { install, TablePro }
+export * from './components/Table/types'
 export default TDesignPro
