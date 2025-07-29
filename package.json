@@ -1,6 +1,6 @@
 {
   "name": "t-design-pro",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "type": "module",
   "types": "./dist/types/index.d.ts",
   "main": "./dist/index.umd.js",
@@ -17,7 +17,10 @@
     "preview": "vite preview",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "docs:preview": "vitepress preview docs",
+    "publish:patch": "node publish.js patch",
+    "publish:minor": "node publish.js minor",
+    "publish:major": "node publish.js major"
   },
   "peerDependencies": {
     "tdesign-vue-next": "^1.14.2",
