@@ -1,6 +1,6 @@
 <template>
   <div>
-    <TablePro :columns="columns" row-key="id" :request="request"></TablePro>
+    <TablePro :columns="columns" row-key="id" :data="data"></TablePro>
   </div>
 </template>
 
@@ -34,14 +34,4 @@ const data = ref([
   { id: 3, name: 'Alice Johnson', age: 28, address: '789 Maple Ave' },
   { id: 4, name: 'Bob Brown', age: 35, address: '101 Pine Rd' }
 ])
-const request = async () => {
-  // Simulate an API call
-  return Promise.resolve({
-    data: data.value,
-    total: data.value.length,
-    success: true
-  })
-}
 </script>
-
-<style></style>

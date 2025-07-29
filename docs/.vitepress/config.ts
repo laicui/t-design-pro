@@ -17,25 +17,30 @@ export default defineConfig({
       }
     }
   },
+  appearance: false,
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
+    outline: {
+      level: 'deep',
+      label: '页面导航'
+    },
     nav: [
       { text: '主页', link: '/' },
-      { text: '文档', link: '/quickStart/install' }
+      { text: '文档', link: '/what-is-t-design-pro' }
     ],
 
     sidebar: [
       {
+        text: '简介',
+        link: '/what-is-t-design-pro'
+      },
+      {
         text: '快速开始',
-        items: [{ text: '安装', link: '/quickStart/install' }]
+        link: '/quickStart'
       },
       {
-        text: '基础',
-        items: [{ text: 'button 按钮', link: '/base/button/' }]
-      },
-      {
-        text: '数据展示',
-        items: [{ text: 'table 表格', link: '/dataDisplay/table/' }]
+        text: '组件',
+        items: [{ text: 'TablePro', link: '/components/table-pro' }]
       }
     ],
 

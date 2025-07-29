@@ -180,16 +180,16 @@ watch(
 )
 
 const request = async (params?: { [key: string]: any }) => {
+  if (!props.request) return
   dataSource.value = []
   try {
-    if (!props.request) return
     loading.value = true
 
     const requestParams: {
       [key: string]: any
     } = {
-      ...(props.sort || {}),
-      ...(props.extendParams || {}),
+      ...props.sort,
+      ...props.extendParams,
       ...toRaw(searchFormData.value),
       ...params
     }
