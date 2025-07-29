@@ -29,7 +29,7 @@ yarn add t-design-pro
 :::
 
 > [!CAUTION] 注意
-> 当前组件库依赖于 [tdesign-vue-next](tdesign-vue-next) ，请先在项目中安装 tdesign-vue-next。
+> 当前组件库依赖于 [tdesign-vue-next](https://tdesign.tencent.com/vue-next/getting-started) ，请先在项目中安装 tdesign-vue-next。
 
 ## 使用
 
@@ -37,7 +37,7 @@ yarn add t-design-pro
 
 基础使用会全量注册所有组件，如果您的项目大规模使用组件，请放心使用这种方式。
 
-```ts
+```typescript
 import TDesignPro from 't-design-pro'
 import TDesign from 'tdesign-vue-next'
 import { createApp } from 'vue'
