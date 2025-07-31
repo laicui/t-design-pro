@@ -28,12 +28,20 @@ jobs:
       - name: Build package
         run: pnpm run build
 
-      - name: Update version from tag
+      - name: Verify version matches tag
         run: |
-          # 从GitHub release tag获取版本号（去掉v前缀）
-          VERSION=${GITHUB_REF#refs/tags/v}
-          echo "Setting version to $VERSION"
-          npm version $VERSION --no-git-tag-version
+          # 验证package.json中的版本是否与tag匹配
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          TAG_VERSION=${GITHUB_REF#refs/tags/v}
+          echo "Package version: $PACKAGE_VERSION"
+          echo "Tag version: $TAG_VERSION"
+          
+          if [ "$PACKAGE_VERSION" != "$TAG_VERSION" ]; then
+            echo "❌ 版本不匹配! Package: $PACKAGE_VERSION, Tag: $TAG_VERSION"
+            exit 1
+          else
+            echo "✅ 版本匹配"
+          fi
 
       - name: Publish to NPM
         run: npm publish
