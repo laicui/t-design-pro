@@ -249,16 +249,32 @@ async function main() {
 
   // 确认发布
   console.log('\n是否继续发布? (y/N)')
-  process.stdin.setRawMode(true)
-  process.stdin.resume()
 
   const confirmed = await new Promise((resolve) => {
+    process.stdin.setRawMode(true)
+    process.stdin.resume()
+
+    const cleanup = () => {
+      try {
+        process.stdin.setRawMode(false)
+        process.stdin.pause()
+        process.stdin.removeAllListeners('data')
+      } catch {
+        // 忽略清理错误
+      }
+    }
+
     process.stdin.once('data', (key) => {
-      process.stdin.setRawMode(false)
-      process.stdin.pause()
+      cleanup()
       const input = key.toString().toLowerCase().trim()
       resolve(input === 'y' || input === 'yes')
     })
+
+    // 超时处理，防止卡死
+    setTimeout(() => {
+      cleanup()
+      resolve(false)
+    }, 30000)
   })
 
   if (!confirmed) {
@@ -333,13 +349,28 @@ npm install t-design-pro@${newVersion}
       execSilent('gh auth status')
 
       log('\n🎉 创建GitHub Release...', 'blue')
+
+      // 将notes写入临时文件，避免shell转义问题
+      const tempNotesFile = '/tmp/release-notes.md'
+      fs.writeFileSync(tempNotesFile, releaseNotes)
+
       exec(
-        `gh release create v${newVersion} --title "Release v${newVersion}" --notes "${releaseNotes}"`
+        `gh release create v${newVersion} --title "Release v${newVersion}" --notes-file "${tempNotesFile}"`
       )
+
+      // 清理临时文件
+      try {
+        fs.unlinkSync(tempNotesFile)
+      } catch {
+        // 忽略清理错误
+      }
 
       log(`\n✅ GitHub Release创建成功! GitHub Actions将自动发布到NPM`, 'green')
       log(`🔗 Release: https://github.com/laicui/t-design-pro/releases/tag/v${newVersion}`, 'blue')
       log(`⏳ 请等待GitHub Actions完成npm发布...`, 'yellow')
+
+      // 明确退出
+      process.exit(0)
     } catch (error) {
       if (error.message && error.message.includes('not logged into')) {
         log(`❌ GitHub CLI未认证，请先运行: gh auth login`, 'red')
@@ -355,6 +386,9 @@ npm install t-design-pro@${newVersion}
       log(`📝 Release标题: Release v${newVersion}`, 'blue')
       log(`📝 Release内容:\n${releaseNotes.replace(/\\n/g, '\n')}`, 'blue')
       log(`ℹ️  创建后将自动触发GitHub Actions发布npm`, 'blue')
+
+      // 明确退出
+      process.exit(0)
     }
   } catch (error) {
     log(`\n❌ 发布失败: ${error.message}`, 'red')
