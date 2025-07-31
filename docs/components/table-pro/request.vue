@@ -16,7 +16,7 @@ import { TablePro } from 't-design-pro'
 import { Button as TButton } from 'tdesign-vue-next'
 import { ref } from 'vue'
 
-import { ProTableCol } from '@/components/Table/types'
+import type { ProTableCol } from '@/components/Table/types'
 
 const columns = ref<ProTableCol[]>([
   {
