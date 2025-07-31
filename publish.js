@@ -327,17 +327,31 @@ npm install t-design-pro@${newVersion}
 - [GitHub Repository](https://github.com/laicui/t-design-pro)
 - [文档地址](https://github.com/laicui/t-design-pro#readme)`
 
-    // 尝试使用gh CLI，如果失败则提示手动创建
+    // 尝试使用gh CLI创建GitHub Release
     try {
+      // 先检查gh CLI是否已认证
+      execSilent('gh auth status')
+
+      log('\n🎉 创建GitHub Release...', 'blue')
       exec(
         `gh release create v${newVersion} --title "Release v${newVersion}" --notes "${releaseNotes}"`
       )
+
       log(`\n✅ GitHub Release创建成功! GitHub Actions将自动发布到NPM`, 'green')
       log(`🔗 Release: https://github.com/laicui/t-design-pro/releases/tag/v${newVersion}`, 'blue')
       log(`⏳ 请等待GitHub Actions完成npm发布...`, 'yellow')
-    } catch {
-      log(`⚠️  创建GitHub Release失败，请手动创建:`, 'yellow')
-      log(`🔗 https://github.com/laicui/t-design-pro/releases/new?tag=v${newVersion}`, 'blue')
+    } catch (error) {
+      if (error.message && error.message.includes('not logged into')) {
+        log(`❌ GitHub CLI未认证，请先运行: gh auth login`, 'red')
+        log(`⚠️  认证完成后，请手动创建Release:`, 'yellow')
+      } else {
+        log(`⚠️  创建GitHub Release失败，请手动创建:`, 'yellow')
+      }
+
+      log(
+        `🔗 手动创建链接: https://github.com/laicui/t-design-pro/releases/new?tag=v${newVersion}`,
+        'blue'
+      )
       log(`📝 Release标题: Release v${newVersion}`, 'blue')
       log(`📝 Release内容:\n${releaseNotes.replace(/\\n/g, '\n')}`, 'blue')
       log(`ℹ️  创建后将自动触发GitHub Actions发布npm`, 'blue')
