@@ -45,6 +45,26 @@ function hasUncommittedChanges() {
   return status.length > 0
 }
 
+function hasUnpushedCommits() {
+  try {
+    // 获取本地和远程的差异
+    const unpushed = execSilent('git log origin/main..HEAD --oneline')
+    return unpushed.length > 0
+  } catch {
+    // 如果命令失败，可能是分支不存在或网络问题
+    return false
+  }
+}
+
+function isRemoteReachable() {
+  try {
+    execSilent('git fetch --dry-run')
+    return true
+  } catch {
+    return false
+  }
+}
+
 function getCurrentVersion() {
   const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'))
   return packageJson.version
@@ -235,10 +255,35 @@ async function main() {
     process.exit(1)
   }
 
-  // 检查工作区状态
+  // 检查工作区状态 - 必须是干净且同步的状态
+  log('\n🔍 检查代码状态...', 'blue')
+
+  // 检查未提交的更改
   if (hasUncommittedChanges()) {
-    log('⚠️  检测到未提交的更改，将在发布后自动提交', 'yellow')
+    log('❌ 检测到未提交的更改，请先提交所有更改后再发布', 'red')
+    log('💡 运行以下命令提交更改:', 'blue')
+    log('   git add .', 'blue')
+    log('   git commit -m "你的提交信息"', 'blue')
+    process.exit(1)
   }
+
+  // 检查远程连接
+  if (!isRemoteReachable()) {
+    log('❌ 无法连接到远程仓库，请检查网络连接', 'red')
+    log('💡 尝试运行: git fetch', 'blue')
+    process.exit(1)
+  }
+
+  // 检查未推送的提交
+  if (hasUnpushedCommits()) {
+    log('❌ 检测到未推送的提交，请先将代码推送到远程仓库', 'red')
+    log('💡 运行以下命令推送代码:', 'blue')
+    log('   git push origin main', 'blue')
+    log('📌 这确保了本地代码与远程代码同步', 'yellow')
+    process.exit(1)
+  }
+
+  log('✅ 代码状态检查通过，本地与远程代码已同步', 'green')
 
   // 获取当前版本并计算新版本
   const currentVersion = getCurrentVersion()
@@ -306,19 +351,12 @@ async function main() {
     exec(`git commit -m "chore: bump version to ${newVersion}"`)
     exec(`git tag -a v${newVersion} -m "Release v${newVersion}"`)
 
-    // 5. 检查并提交其他未提交的更改
-    if (hasUncommittedChanges()) {
-      log('\n📝 提交其他未提交的更改...', 'blue')
-      exec('git add .')
-      exec(`git commit -m "chore: post-release cleanup and updates"`)
-    }
-
-    // 6. 推送到远程仓库
+    // 5. 推送到远程仓库
     log('\n⬆️  推送到远程仓库...', 'blue')
     exec('git push origin main')
     exec(`git push origin v${newVersion}`)
 
-    // 7. 生成更新日志
+    // 6. 生成更新日志
     log('\n📋 生成更新日志...', 'blue')
     const lastTag = getLastTag()
     const changelog = generateChangelog(lastTag, newVersion)
