@@ -1,7 +1,7 @@
 <template>
   <div class="pro-table-wrapper">
     <!-- 表格顶部搜索表单card -->
-    <t-card v-if="renderSearchForm" ref="formCardRef" class="form-card" :bordered="false">
+    <div v-if="renderSearchForm" class="form-card">
       <search-form
         ref="searchFormRef"
         v-model="searchFormData"
@@ -10,9 +10,9 @@
         @submit="reset"
         @reset="reset"
       />
-    </t-card>
+    </div>
     <!-- 表格主题card -->
-    <t-card class="table-card" :bordered="false">
+    <div class="table-card">
       <!-- 表格头部扩展插槽 -->
       <div
         v-if="slots.tableHeaderCenter || slots.tableHeaderLeft || slots.tableHeaderRight"
@@ -47,12 +47,11 @@
           <slot name="empty"></slot>
         </template>
       </t-enhanced-table>
-    </t-card>
+    </div>
   </div>
 </template>
 <script setup lang="ts">
 import {
-  Card as TCard,
   Col as TCol,
   EnhancedTable as TEnhancedTable,
   EnhancedTableInstanceFunctions,
@@ -289,21 +288,21 @@ defineExpose({
   display: flex;
   flex-direction: column;
 
-  & :deep(.t-table__header) {
-    & > tr > th {
-      background-color: var(--td-bg-color-secondarycontainer);
-    }
+  * {
+    box-sizing: border-box;
+  }
+
+  .form-card {
+    flex-shrink: 0;
+    padding: 12px;
+    margin-bottom: 16px;
   }
 
   .table-card {
     flex: 1;
     height: 1%;
-
-    :deep(.t-card__body) {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-    }
+    display: flex;
+    flex-direction: column;
   }
 
   .table-default {
@@ -318,7 +317,7 @@ defineExpose({
   }
 }
 .table-header-row {
-  padding-bottom: 16px;
+  margin-bottom: 16px;
 
   .table-header-left {
     display: flex;

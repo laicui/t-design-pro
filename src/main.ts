@@ -1,4 +1,5 @@
 import 'tdesign-vue-next/es/style/index.css'
+import './styles/index.less'
 
 import TDesign from 'tdesign-vue-next'
 import { createApp } from 'vue'

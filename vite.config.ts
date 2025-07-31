@@ -20,7 +20,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      'design-pro': r('./src/index.ts'),
+      't-design-pro': r('./src/index.ts'),
       '@': resolve(__dirname, 'src')
     }
   },
