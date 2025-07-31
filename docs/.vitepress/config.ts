@@ -26,7 +26,7 @@ export default defineConfig({
     },
     nav: [
       { text: '主页', link: '/' },
-      { text: '文档', link: '/what-is-t-design-pro' }
+      { text: '文档', link: '/what-is-t-design-pro/' }
     ],
 
     sidebar: [
