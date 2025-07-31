@@ -32,7 +32,9 @@ function exec(command, options = {}) {
 
 function execSilent(command) {
   try {
-    return execSync(command, { encoding: 'utf8' }).trim()
+    return execSync(command, {
+      encoding: 'utf8'
+    }).trim()
   } catch {
     return ''
   }
@@ -212,6 +214,9 @@ function generateChangelog(lastTag) {
 
 async function main() {
   log('🚀 开始发布流程...', 'blue')
+
+  // 抑制zsh切换提示
+  process.env.BASH_SILENCE_DEPRECATION_WARNING = '1'
 
   // 检查是否在git仓库中
   try {
