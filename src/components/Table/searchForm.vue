@@ -17,7 +17,11 @@
             :name="formItemCol.key"
           >
             <component
-              :is="formItemCol.valueType"
+              :is="
+                typeof formItemCol.valueType === 'string'
+                  ? componentMap[formItemCol.valueType] || componentMap['t-input']
+                  : formItemCol.valueType
+              "
               v-model="formData[formItemCol.key]"
               v-bind="formItemCol.fieldProps"
             />
@@ -53,16 +57,31 @@ import { useElementSize } from '@vueuse/core'
 import {
   Button as TButton,
   Col as TCol,
+  DatePicker as TDatePicker,
+  DateRangePicker as TDateRangePicker,
   Form as TForm,
   FormInstanceFunctions,
   FormItem as TFormItem,
   FormResetParams,
-  Row as TRow
+  Icon as TIcon,
+  Input as TInput,
+  Link as TLink,
+  Row as TRow,
+  Select as TSelect,
+  Space as TSpace
 } from 'tdesign-vue-next'
 import type { VNode } from 'vue'
 import { computed, ref, watchEffect } from 'vue'
 
 import { ProTableCol, SearchFormProps, SearchValueType } from './types'
+
+// 组件映射对象，将字符串映射到实际组件
+const componentMap = {
+  't-input': TInput,
+  't-select': TSelect,
+  't-date-picker': TDatePicker,
+  't-date-range-picker': TDateRangePicker
+}
 
 const props = withDefaults(defineProps<SearchFormProps>(), {
   labelWidth: 'auto',
