@@ -232,6 +232,55 @@ function generateChangelog(lastTag) {
   }
 }
 
+function updateChangelogFile(newVersion, changelog) {
+  const changelogPath = 'CHANGELOG.md'
+
+  try {
+    let content = ''
+    if (fs.existsSync(changelogPath)) {
+      content = fs.readFileSync(changelogPath, 'utf8')
+    }
+
+    // 获取当前日期
+    const currentDate = new Date().toISOString().split('T')[0]
+
+    // 创建新版本的条目
+    const newEntry = `## [${newVersion}] - ${currentDate}
+
+${changelog}
+
+`
+
+    // 查找插入位置（在 [未发布] 部分之后）
+    const unreleasedIndex = content.indexOf('## [未发布]')
+    if (unreleasedIndex !== -1) {
+      // 找到未发布部分的结束位置
+      const nextVersionIndex = content.indexOf('\n## [', unreleasedIndex + 1)
+      if (nextVersionIndex !== -1) {
+        // 在未发布部分和下一个版本之间插入
+        content =
+          content.slice(0, nextVersionIndex) + '\n' + newEntry + content.slice(nextVersionIndex)
+      } else {
+        // 如果没有其他版本，直接在文件末尾添加
+        content = content + '\n' + newEntry
+      }
+    } else {
+      // 如果没有未发布部分，在文件开头添加
+      const headerEnd = content.indexOf('\n## ')
+      if (headerEnd !== -1) {
+        content = content.slice(0, headerEnd) + '\n\n' + newEntry + content.slice(headerEnd)
+      } else {
+        content = content + '\n\n' + newEntry
+      }
+    }
+
+    fs.writeFileSync(changelogPath, content)
+    log(`✅ CHANGELOG.md 已更新`, 'green')
+  } catch (error) {
+    log(`⚠️  更新 CHANGELOG.md 失败: ${error.message}`, 'yellow')
+  }
+}
+
 async function main() {
   log('🚀 开始发布流程...', 'blue')
 
@@ -359,9 +408,20 @@ async function main() {
     // 6. 生成更新日志
     log('\n📋 生成更新日志...', 'blue')
     const lastTag = getLastTag()
-    const changelog = generateChangelog(lastTag, newVersion)
+    const changelog = generateChangelog(lastTag)
 
-    // 7. 创建GitHub Release (这将触发npm发布)
+    // 7. 更新 CHANGELOG.md 文件
+    log('\n📝 更新 CHANGELOG.md...', 'blue')
+    updateChangelogFile(newVersion, changelog)
+
+    // 提交 CHANGELOG.md 的更改
+    if (fs.existsSync('CHANGELOG.md')) {
+      exec('git add CHANGELOG.md')
+      exec('git commit -m "docs: update CHANGELOG.md for v' + newVersion + '"')
+      exec('git push origin main')
+    }
+
+    // 8. 创建GitHub Release (这将触发npm发布)
     log('\n🎉 创建GitHub Release...', 'blue')
     const releaseNotes = `# Release v${newVersion}
 
