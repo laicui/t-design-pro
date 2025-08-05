@@ -31,7 +31,6 @@ T-Design Pro 是一个基于 [腾讯 TDesign Vue Next](https://github.com/Tencen
 
 ### 📱 响应式设计
 - 适配各种屏幕尺寸和设备
-- 移动端友好的交互体验
 - 自适应布局和组件行为
 
 ## 设计原则
