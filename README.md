@@ -1,11 +1,11 @@
 # T-Design Pro
 
 <p align="center">
-  <img src="https://tdesign.tencent.com/favicon.ico" width="64" height="64" alt="TDesign Logo">
+  <strong>基于 TDesign Vue Next 的 Vue 3 高阶组件库</strong>
 </p>
 
 <p align="center">
-  <strong>基于 TDesign 的 Vue 3 高阶组件库</strong>
+  本项目基于腾讯 <a href="https://github.com/Tencent/tdesign-vue-next">TDesign Vue Next</a> 进行开发，提供更丰富的业务组件
 </p>
 
 <p align="center">
