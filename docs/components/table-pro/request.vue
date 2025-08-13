@@ -14,9 +14,22 @@
 <script setup lang="ts">
 import { TablePro } from 't-design-pro'
 import { Button as TButton } from 'tdesign-vue-next'
-import { ref } from 'vue'
+import { useData } from 'vitepress'
+import { ref, watch } from 'vue'
 
 import type { ProTableCol } from '@/components/Table/types'
+
+const { isDark } = useData()
+
+watch(
+  isDark,
+  (newVal) => {
+    document.documentElement.setAttribute('theme-mode', newVal ? 'dark' : 'light')
+  },
+  {
+    immediate: true
+  }
+)
 
 const columns = ref<ProTableCol[]>([
   {
