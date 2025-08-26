@@ -18,12 +18,17 @@
         v-if="slots.tableHeaderCenter || slots.tableHeaderLeft || slots.tableHeaderRight"
         ref="tableHeaderRowRef"
       >
-        <t-row class="table-header-row">
+        <t-row v-if="slots.tableHeaderCenter" class="table-header-row">
           <t-col :span="12">
             <slot name="tableHeaderCenter"></slot>
           </t-col>
         </t-row>
-        <t-row class="table-header-row" justify="space-between" align="center">
+        <t-row
+          v-if="slots.tableHeaderLeft || slots.tableHeaderRight"
+          class="table-header-row"
+          justify="space-between"
+          align="center"
+        >
           <t-col flex="auto" class="table-header-left">
             <slot name="tableHeaderLeft"></slot>
           </t-col>
@@ -295,7 +300,7 @@ defineExpose({
   .form-card {
     flex-shrink: 0;
     padding: 12px;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
   }
 
   .table-card {
@@ -317,7 +322,7 @@ defineExpose({
   }
 }
 .table-header-row {
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 
   .table-header-left {
     display: flex;

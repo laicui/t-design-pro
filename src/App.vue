@@ -92,5 +92,7 @@ const data = ref([
 .app-container {
   width: 100%;
   height: 600px;
+  background-color: #fff;
+  padding: 16px;
 }
 </style>
