@@ -56,7 +56,9 @@ const data = [
   { id: 4, name: 'Bob Brown', age: 35, address: '101 Pine Rd' }
 ]
 
-const getData = () => {
+const getData = (params: { name: string }) => {
+  console.log('params', params)
+
   return new Promise<{ data: any[]; total: number }>((resolve) => {
     setTimeout(() => {
       resolve({
@@ -68,10 +70,10 @@ const getData = () => {
 }
 
 const loading = ref(false)
-const request = async () => {
+const request = async (params) => {
   try {
     loading.value = true
-    const result = await getData()
+    const result = await getData(params)
 
     return {
       data: result.data,

@@ -34,7 +34,12 @@ export interface ProTableCol<T extends TableRowData = any> extends PrimaryTableC
   cellContentEnum?: { [key: string | symbol]: any }
 }
 
-export type SearchValueType = 't-input' | 't-select' | 't-date-picker' | 't-date-range-picker' | VNode
+export type SearchValueType =
+  | 't-input'
+  | 't-select'
+  | 't-date-picker'
+  | 't-date-range-picker'
+  | VNode
 
 export interface ProTableColSearchType {
   fieldProps?: { [key: string]: any }
@@ -55,6 +60,6 @@ export interface ExtendParams {
   [key: string]: any
 }
 
-export type ProTableRequestMethod = (params: {
-  [key: string]: any
-}) => Promise<{ data: Array<any>; total: number } | null>
+export type ProTableRequestMethod = (
+  params: any
+) => Promise<{ data: Array<any>; total: number } | null>
