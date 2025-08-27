@@ -159,10 +159,20 @@ const formatColumns = computed(() => {
       if (!item.cell && item.cellContentEnum) {
         return {
           ...item,
-          cell: (_h, { col, row }) => {
-            if (item.cellContentEnum) {
-              return item.cellContentEnum[row[col.colKey]] || props.cellEmptyContent
+          cell: (h, props) => {
+            if (item.cellContentEnum && props.col.colKey) {
+              const enumValue = item.cellContentEnum[props.row[props.col.colKey]]
+              if (enumValue !== undefined && enumValue !== null) {
+                return enumValue
+              }
             }
+
+            // 处理 cellEmptyContent，可能是字符串或渲染函数
+            const emptyContent = props.cellEmptyContent
+            if (typeof emptyContent === 'function') {
+              return emptyContent(h, props)
+            }
+            return emptyContent
           }
         }
       }

@@ -3,13 +3,13 @@
 layout: home
 
 hero:
-  name: "t-design-pro"
-  text: "基于tdesign二次封装的高阶组件"
-  tagline: "按需引入、支持typescript、基于vue3"
+  name: 't-design-pro'
+  text: '基于tdesign二次封装的高阶组件'
+  tagline: '按需引入、支持typescript、基于vue3'
   actions:
     - theme: brand
       text: 快速开始
-      link: /quickStart
+      link: /guide/quickStart
 
 features:
   - title: Typescript
