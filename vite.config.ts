@@ -14,8 +14,9 @@ export default defineConfig({
     vueJsx(),
     dts({
       entryRoot: 'src',
-      include: ['src/components/**/*', 'src/index.ts'],
-      outDir: 'dist/types'
+      include: ['src/components/**/*', 'src/index.ts', 'src/global.d.ts'],
+      outDir: 'dist/types',
+      copyDtsFiles: true
     })
   ],
   resolve: {

@@ -66,11 +66,112 @@ npm install tdesign-vue-next@^1.14.0
 
 ## 📋 组件列表
 
-| 组件名 | 描述 | 文档 |
-|--------|------|------|
+| 组件名   | 描述                                       | 文档                                                                   |
+| -------- | ------------------------------------------ | ---------------------------------------------------------------------- |
 | TablePro | 增强版表格组件，集成搜索、分页、排序等功能 | [查看文档](https://laicui.github.io/t-design-pro/components/table-pro) |
 
 ## 🚀 快速开始
+
+### 1. 安装依赖
+
+```bash
+# 安装组件库
+pnpm add t-design-pro
+
+# 安装必要的前置依赖
+pnpm add vue@^3.5.0 tdesign-vue-next@^1.14.0
+```
+
+### 2. 全局注册组件
+
+```typescript
+// main.ts
+import { createApp } from 'vue'
+import TDesign from 'tdesign-vue-next'
+import TDesignPro from 't-design-pro'
+
+// 引入组件库的少量全局样式变量
+import 'tdesign-vue-next/es/style/index.css'
+import 't-design-pro/dist/styles/index.css'
+
+import App from './App.vue'
+
+const app = createApp(App)
+
+app.use(TDesign)
+app.use(TDesignPro)
+
+app.mount('#app')
+```
+
+### 3. TypeScript 支持
+
+如果你的项目使用 TypeScript，为了获得更好的类型提示和全局组件支持，可以通过以下任一方式配置：
+
+#### 方式一：通过 tsconfig.json 配置（推荐）
+
+在你的 `tsconfig.json` 文件中添加类型文件路径：
+
+```json
+{
+  "compilerOptions": {
+    // ... 其他配置
+  },
+  "include": ["src/**/*", "node_modules/t-design-pro/dist/types/global.d.ts"]
+}
+```
+
+#### 方式二：创建本地类型声明文件
+
+在项目根目录创建或修改 `types/global.d.ts` 文件：
+
+```typescript
+// types/global.d.ts
+import 't-design-pro/dist/types/global'
+
+// 或者手动声明
+declare module '@vue/runtime-core' {
+  export interface GlobalComponents {
+    TablePro: import('t-design-pro').TablePro
+  }
+}
+```
+
+#### 方式三：在 compilerOptions.types 中声明
+
+```json
+{
+  "compilerOptions": {
+    "types": ["t-design-pro/dist/types/global"]
+  }
+}
+```
+
+### 4. 使用组件
+
+完成上述配置后，你就可以在 Vue 模板中直接使用组件，并获得完整的 TypeScript 类型提示：
+
+```vue
+<template>
+  <div>
+    <!-- 现在 TablePro 标签会有完整的类型提示 -->
+    <TablePro :columns="columns" :data="data" :pagination="pagination" />
+  </div>
+</template>
+
+<script setup lang="ts">
+// 无需手动导入，全局注册的组件会自动获得类型支持
+const columns = [
+  { title: '姓名', key: 'name' },
+  { title: '年龄', key: 'age' }
+]
+
+const data = [
+  { name: '张三', age: 25 },
+  { name: '李四', age: 30 }
+]
+</script>
+```
 
 详细的使用方法和 API 文档请查看：[📖 在线文档](https://laicui.github.io/t-design-pro/)
 
