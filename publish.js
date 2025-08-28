@@ -132,6 +132,15 @@ function generateChangelog(lastTag) {
     commitLines.forEach((line) => {
       const [hash, message, author, date] = line.split('|')
 
+      // 跳过自动生成的提交
+      if (
+        message.includes('chore: bump version') ||
+        message.includes('docs: update CHANGELOG.md') ||
+        message.includes('Release v')
+      ) {
+        return
+      }
+
       // 解析conventional commit格式
       const conventionalMatch = message.match(
         /^(feat|fix|docs|style|refactor|test|chore)(\(.+\))?\s*:\s*(.+)/
@@ -381,11 +390,22 @@ async function main() {
     log('\n🔨 构建项目...', 'blue')
     exec('npm run build')
 
-    // 2. 更新版本号
+    // 2. 获取上一个标签并生成更新日志（在创建新标签之前！）
+    log('\n📋 生成更新日志...', 'blue')
+    const lastTag = getLastTag()
+    const changelog = generateChangelog(lastTag)
+    log(`📋 基于标签 ${lastTag} 生成的更新日志:`, 'blue')
+    log(changelog, 'blue')
+
+    // 3. 更新版本号
     log(`\n📝 更新版本号到 ${newVersion}...`, 'blue')
     updatePackageVersion(newVersion)
 
-    // 3. 运行测试（如果存在）
+    // 4. 更新 CHANGELOG.md 文件
+    log('\n📝 更新 CHANGELOG.md...', 'blue')
+    updateChangelogFile(newVersion, changelog)
+
+    // 5. 运行测试（如果存在）
     if (fs.existsSync('package.json')) {
       const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'))
       if (pkg.scripts && pkg.scripts.test) {
@@ -394,32 +414,16 @@ async function main() {
       }
     }
 
-    // 4. 创建git tag和提交
+    // 6. 创建git tag和提交
     log(`\n🏷️  创建git标签 v${newVersion}...`, 'blue')
-    exec(`git add package.json`)
+    exec(`git add package.json CHANGELOG.md`)
     exec(`git commit -m "chore: bump version to ${newVersion}"`)
     exec(`git tag -a v${newVersion} -m "Release v${newVersion}"`)
 
-    // 5. 推送到远程仓库
+    // 7. 推送到远程仓库
     log('\n⬆️  推送到远程仓库...', 'blue')
     exec('git push origin main')
     exec(`git push origin v${newVersion}`)
-
-    // 6. 生成更新日志
-    log('\n📋 生成更新日志...', 'blue')
-    const lastTag = getLastTag()
-    const changelog = generateChangelog(lastTag)
-
-    // 7. 更新 CHANGELOG.md 文件
-    log('\n📝 更新 CHANGELOG.md...', 'blue')
-    updateChangelogFile(newVersion, changelog)
-
-    // 提交 CHANGELOG.md 的更改
-    if (fs.existsSync('CHANGELOG.md')) {
-      exec('git add CHANGELOG.md')
-      exec('git commit -m "docs: update CHANGELOG.md for v' + newVersion + '"')
-      exec('git push origin main')
-    }
 
     // 8. 创建GitHub Release (这将触发npm发布)
     log('\n🎉 创建GitHub Release...', 'blue')
