@@ -199,7 +199,7 @@ function main() {
   if (tagExists) {
     log(`🗑️  删除已存在的本地标签 v${currentVersion}`, 'yellow')
     execSilent(`git tag -d v${currentVersion}`)
-    
+
     // 检查远程标签是否存在
     const remoteTagExists = execSilent(`git ls-remote --tags origin v${currentVersion}`)
     if (remoteTagExists) {
