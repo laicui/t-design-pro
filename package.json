@@ -29,9 +29,11 @@
     "release:alpha": "standard-version --prerelease alpha",
     "release:beta": "standard-version --prerelease beta",
     "release:dry": "standard-version --dry-run",
-    "publish:patch": "node publish.js patch",
-    "publish:minor": "node publish.js minor",
-    "publish:major": "node publish.js major"
+    "publish": "node release.js auto",
+    "publish:patch": "node release.js patch",
+    "publish:minor": "node release.js minor",
+    "publish:major": "node release.js major",
+    "publish:dry": "node release.js dry"
   },
   "peerDependencies": {
     "tdesign-vue-next": "^1.14.2",
