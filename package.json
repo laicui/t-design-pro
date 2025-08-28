@@ -29,7 +29,7 @@
     "release:alpha": "standard-version --prerelease alpha",
     "release:beta": "standard-version --prerelease beta",
     "release:push": "git push --follow-tags origin main",
-    "release:publish": "pnpm run release && pnpm run release:push",
+    "release:publish": "pnpm release && pnpm release:push",
     "release:create": "node scripts/create-release.js",
     "release:dry": "standard-version --dry-run"
   },
