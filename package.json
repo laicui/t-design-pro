@@ -5,6 +5,10 @@
   "types": "./dist/types/index.d.ts",
   "main": "./dist/index.umd.js",
   "module": "./dist/index.es.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "homepage": "https://github.com/laicui/t-design-pro",
   "repository": {
     "type": "git",

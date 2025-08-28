@@ -1,11 +1,12 @@
 // 全局组件类型声明文件
-// 此文件为使用 t-design-pro 的项目提供全局组件类型支持
+// 用户需要在自己项目的 tsconfig.json 中通过 include 引入此文件
+// 例如：{ "include": ["node_modules/t-design-pro/dist/types/global.d.ts"] }
 
-import type { DefineComponent } from 'vue'
+import type TablePro from './components/Table/index.vue'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    TablePro: DefineComponent<any, any, any>
+    TablePro: typeof TablePro
   }
 }
 

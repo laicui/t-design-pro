@@ -106,9 +106,9 @@ app.mount('#app')
 
 ### 3. TypeScript 支持
 
-如果你的项目使用 TypeScript，为了获得更好的类型提示和全局组件支持，可以通过以下任一方式配置：
+如果你的项目使用 TypeScript，为了获得更好的类型提示和全局组件支持，推荐配置全局类型声明：
 
-#### 方式一：通过 tsconfig.json 配置（推荐）
+#### 推荐方式：通过 tsconfig.json 配置
 
 在你的 `tsconfig.json` 文件中添加类型文件路径：
 
@@ -121,31 +121,16 @@ app.mount('#app')
 }
 ```
 
-#### 方式二：创建本地类型声明文件
+#### 或者按需导入（无需额外配置）
 
-在项目根目录创建或修改 `types/global.d.ts` 文件：
+如果不想配置全局类型，也可以直接按需导入组件：
 
 ```typescript
-// types/global.d.ts
-import 't-design-pro/dist/types/global'
-
-// 或者手动声明
-declare module '@vue/runtime-core' {
-  export interface GlobalComponents {
-    TablePro: import('t-design-pro').TablePro
-  }
-}
+import { TablePro } from 't-design-pro'
+// 这种方式可以直接获得完整的类型支持，无需额外配置
 ```
 
-#### 方式三：在 compilerOptions.types 中声明
-
-```json
-{
-  "compilerOptions": {
-    "types": ["t-design-pro/dist/types/global"]
-  }
-}
-```
+> **注意**：全局类型声明会自动引用组件的实际类型定义，无需手动维护。
 
 ### 4. 使用组件
 
