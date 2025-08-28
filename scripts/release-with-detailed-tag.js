@@ -19,7 +19,10 @@ function log(message, color = 'reset') {
 
 function execSilent(command) {
   try {
-    return execSync(command, { encoding: 'utf8' }).trim()
+    return execSync(command, {
+      encoding: 'utf8',
+      stdio: ['inherit', 'pipe', 'pipe'] // 只捕获 stdout，忽略 stderr
+    }).trim()
   } catch {
     return ''
   }
@@ -191,12 +194,18 @@ function main() {
   console.log(tagMessage)
   console.log('---')
 
-  // 删除已存在的tag（如果有）
-  try {
+  // 安全地删除已存在的tag（如果有）
+  const tagExists = execSilent(`git tag -l v${currentVersion}`)
+  if (tagExists) {
+    log(`🗑️  删除已存在的本地标签 v${currentVersion}`, 'yellow')
     execSilent(`git tag -d v${currentVersion}`)
-    execSilent(`git push origin --delete v${currentVersion}`)
-  } catch {
-    // 忽略删除失败
+    
+    // 检查远程标签是否存在
+    const remoteTagExists = execSilent(`git ls-remote --tags origin v${currentVersion}`)
+    if (remoteTagExists) {
+      log(`🗑️  删除已存在的远程标签 v${currentVersion}`, 'yellow')
+      execSilent(`git push origin --delete v${currentVersion}`)
+    }
   }
 
   // 创建annotated tag with详细信息
