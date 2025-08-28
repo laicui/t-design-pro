@@ -6,17 +6,7 @@
 并且本项目遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
 
-## [](https://github.com/laicui/t-design-pro/compare/v1.0.26...v) (2025-08-28)
-
-
-### 🐛 Bug 修复
-
-* 修复 publish.js 中 CHANGELOG.md 生成逻辑 ([8610946](https://github.com/laicui/t-design-pro/commit/8610946e92d19ed1ed582681542fec68af1f09a7))
-
-
-### ✨ 新功能
-
-* 添加 standard-version 自动化版本管理 ([7ef0b53](https://github.com/laicui/t-design-pro/commit/7ef0b53aa347669defaa98cf7a76c5f2397d6975))
+## [1.1.0](https://github.com/laicui/t-design-pro/compare/v1.0.26...v1.1.0) (2025-08-28)
 
 
 ### ♻️ 代码重构
@@ -29,6 +19,25 @@
 * update CHANGELOG.md for v1.0.26 ([7dfa0a8](https://github.com/laicui/t-design-pro/commit/7dfa0a8f9c405b1c5d5bb0bcb6a3127b5d52b843))
 * 修复 RELEASE.md 中 Keep a Changelog 链接格式 ([51305c9](https://github.com/laicui/t-design-pro/commit/51305c9e6004a553b5ae29835665f2d3e3daca15))
 * 完善 standard-version 发布配置 ([70f7937](https://github.com/laicui/t-design-pro/commit/70f79375babfcd510070e64283acc607b002dbc7))
+
+
+### ✨ 新功能
+
+* 优化发布流程，添加一键发布命令 ([0c6f75c](https://github.com/laicui/t-design-pro/commit/0c6f75c7b17605159df6bb840af7405d2694ac7d))
+* 添加 standard-version 自动化版本管理 ([7ef0b53](https://github.com/laicui/t-design-pro/commit/7ef0b53aa347669defaa98cf7a76c5f2397d6975))
+
+
+### 🔧 构建/工具
+
+* **release:** null ([0309482](https://github.com/laicui/t-design-pro/commit/0309482fcfb1b220b226031c84fda225c7563e13))
+* 删除不再使用的 release.js 和 global.ts 文件 ([02ee660](https://github.com/laicui/t-design-pro/commit/02ee660785b2bc81afb2154b3a08bab09c817221))
+* 更新版本号为 1.0.26 ([79b533b](https://github.com/laicui/t-design-pro/commit/79b533ba66d4748e33098e4a4da8e353c07d93f1))
+
+
+### 🐛 Bug 修复
+
+* 修复 publish.js 中 CHANGELOG.md 生成逻辑 ([8610946](https://github.com/laicui/t-design-pro/commit/8610946e92d19ed1ed582681542fec68af1f09a7))
+* 修复 standard-version 配置，解决版本号变 null 的问题 ([96e982c](https://github.com/laicui/t-design-pro/commit/96e982c7853e2b20dbf667708eb9c2a85f69a81f))
 
 ## [1.0.26] - 2025-08-28
 
