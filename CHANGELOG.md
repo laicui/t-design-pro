@@ -6,6 +6,18 @@
 并且本项目遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
 
+### [1.5.1](https://github.com/laicui/t-design-pro/compare/v1.5.0...v1.5.1) (2025-08-28)
+
+
+### 💄 样式更新
+
+* 代码格式化，移除多余空行 ([ae5010a](https://github.com/laicui/t-design-pro/commit/ae5010a431611e19248f8c378fbf3fa2aa42358a))
+
+
+### 🔧 构建/工具
+
+* 修正发布脚本命令格式 ([e2497e4](https://github.com/laicui/t-design-pro/commit/e2497e424250cc267a6a0e9dbc07e1915b560f89))
+
 ## [1.5.0](https://github.com/laicui/t-design-pro/compare/v1.4.2...v1.5.0) (2025-08-28)
 
 
