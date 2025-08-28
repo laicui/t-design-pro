@@ -6,6 +6,23 @@
 并且本项目遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
 
+## [1.5.0](https://github.com/laicui/t-design-pro/compare/v1.4.2...v1.5.0) (2025-08-28)
+
+
+### 🔧 构建/工具
+
+* **release:** 1.4.2 ([931e5e0](https://github.com/laicui/t-design-pro/commit/931e5e06d4a5769f9b00f653b4a51f11bb9c4b38))
+
+
+### ♻️ 代码重构
+
+* 移除自定义标签创建脚本，恢复 standard-version 默认行为 ([e3a6083](https://github.com/laicui/t-design-pro/commit/e3a6083f95f84f20089d9838855c4ef083f4b4c1))
+
+
+### ✨ 新功能
+
+* 添加基于 CHANGELOG.md 的 Release Notes 生成脚本 ([91803b0](https://github.com/laicui/t-design-pro/commit/91803b050f3d6821187227267e423b1207e3e635))
+
 ## [1.2.0](https://github.com/laicui/t-design-pro/compare/v1.1.1...v1.2.0) (2025-08-28)
 
 
