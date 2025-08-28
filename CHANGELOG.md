@@ -6,6 +6,13 @@
 并且本项目遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
 
+### [1.1.1](https://github.com/laicui/t-design-pro/compare/v1.1.0...v1.1.1) (2025-08-28)
+
+
+### 🔧 构建/工具
+
+* 移除 prebump 脚本，避免构建过程干扰版本发布 ([56afc57](https://github.com/laicui/t-design-pro/commit/56afc5712caf9e362738943060d370c2186e0eeb))
+
 ## [1.1.0](https://github.com/laicui/t-design-pro/compare/v1.0.26...v1.1.0) (2025-08-28)
 
 
