@@ -29,8 +29,8 @@
     "release:alpha": "standard-version --prerelease alpha",
     "release:beta": "standard-version --prerelease beta",
     "release:push": "git push --follow-tags origin main",
-    "release:github": "gh release create $(node -p \"require('./package.json').version\" | sed 's/^/v/') --title \"Release v$(node -p \"require('./package.json').version\")\" --notes-from-tag",
-    "release:publish": "pnpm run release && pnpm run release:push && pnpm run release:github",
+    "release:publish": "pnpm run release && pnpm run release:push",
+    "release:create": "gh release create $(node -p \"require('./package.json').version\" | sed 's/^/v/') --title \"Release v$(node -p \"require('./package.json').version\")\" --notes-from-tag",
     "release:dry": "standard-version --dry-run"
   },
   "peerDependencies": {
