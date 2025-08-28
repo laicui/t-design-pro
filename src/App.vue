@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <TablePro :columns="columns" row-key="id" :request="request">
+    <TablePro :columns="columns" row-key="id" :pagination="false" :request="request">
       <template #tableHeaderCenter>
         <div>Center Header</div>
       </template>

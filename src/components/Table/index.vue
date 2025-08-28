@@ -111,7 +111,7 @@ const resetPagination = () => {
 }
 
 const paginationComputed = computed(() => {
-  if (props.pagination === null) return undefined
+  if (props.pagination === false) return undefined
   return {
     ...paginationReactive,
     ...props.pagination
@@ -208,7 +208,7 @@ const request = async (params?: { [key: string]: any }) => {
       ...params
     }
 
-    if (props.pagination !== null) {
+    if (props.pagination !== false) {
       const { current, pageSize } = paginationComputed.value || {}
       requestParams.current = current
       requestParams.pageSize = pageSize

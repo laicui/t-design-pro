@@ -1,4 +1,10 @@
-import { EnhancedTableProps, FormProps, PrimaryTableCol, TableRowData } from 'tdesign-vue-next'
+import {
+  EnhancedTableProps,
+  FormProps,
+  PaginationProps,
+  PrimaryTableCol,
+  TableRowData
+} from 'tdesign-vue-next'
 import { VNode } from 'vue'
 
 type PickTableTreeProps = 'tree' | 'onExpandedTreeNodesChange' | 'treeExpandAndFoldIcon'
@@ -10,7 +16,6 @@ type PickPrimaryTableProps =
   | 'disableDataPage'
   | 'hover'
   | 'height'
-  | 'pagination'
   | 'sort'
   | PickTableTreeProps
 
@@ -20,6 +25,7 @@ export interface ProTableProps<T extends TableRowData = TableRowData>
   extends Pick<EnhancedTableProps<T>, PickPrimaryTableProps>,
     Pick<FormProps, 'resetType'> {
   request?: ProTableRequestMethod // 请求数据方法
+  pagination?: PaginationProps | false // 分页配置，传 false 不显示
   extendParams?: ExtendParams // 请求扩展参数
   searchFormProps?: SearchFormProps // 搜索表单透传属性
   columns: ProTableCol[] // 表格列数据
