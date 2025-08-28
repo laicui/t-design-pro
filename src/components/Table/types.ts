@@ -17,6 +17,7 @@ type PickPrimaryTableProps =
   | 'hover'
   | 'height'
   | 'sort'
+  | 'size'
   | PickTableTreeProps
 
 export type ProTablePropsOmitKey = Omit<EnhancedTableProps, 'rowKey' | 'tree'>

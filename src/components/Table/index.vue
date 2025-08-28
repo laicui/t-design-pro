@@ -87,6 +87,7 @@ const props = withDefaults(defineProps<ProTableProps>(), {
   disableDataPage: true,
   hover: true,
   height: '100%',
+  size: 'medium',
   showSortColumnBgColor: true,
   pagination: () => ({
     defaultCurrent: 1,
