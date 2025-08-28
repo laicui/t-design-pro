@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
+import process from 'node:process'
+
 import { execSync } from 'child_process'
 import fs from 'fs'
-import process from 'node:process'
 
 const colors = {
   red: '\x1b[31m',
@@ -178,13 +179,13 @@ function main() {
 
   const currentVersion = getCurrentVersion()
   const lastTag = getLastTag()
-  
+
   log(`📦 当前版本: ${currentVersion}`, 'blue')
   log(`📦 上一个标签: ${lastTag}`, 'blue')
 
   // 生成详细的tag消息
   const tagMessage = generateDetailedTagMessage(currentVersion, lastTag)
-  
+
   log(`📝 Tag 消息内容:`, 'green')
   console.log('---')
   console.log(tagMessage)
@@ -201,11 +202,11 @@ function main() {
   // 创建annotated tag with详细信息
   const tagFile = '/tmp/tag-message.txt'
   fs.writeFileSync(tagFile, tagMessage)
-  
+
   try {
     execSync(`git tag -a v${currentVersion} -F "${tagFile}"`, { stdio: 'inherit' })
     log(`✅ 创建标签 v${currentVersion} 成功`, 'green')
-    
+
     // 清理临时文件
     fs.unlinkSync(tagFile)
   } catch (error) {
