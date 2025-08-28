@@ -44,8 +44,7 @@
   "userUrlFormat": "https://github.com/{{user}}",
   "releaseCommitMessageFormat": "chore(release): {{currentTag}}",
   "scripts": {
-    "prebump": "pnpm run build",
-    "precommit": "echo 'Running pre-commit hook...'"
+    "prebump": "pnpm run build"
   },
   "bumpFiles": [
     {

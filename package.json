@@ -24,16 +24,11 @@
     "docs:preview": "vitepress preview docs",
     "release": "standard-version",
     "release:patch": "standard-version --release-as patch",
-    "release:minor": "standard-version --release-as minor", 
+    "release:minor": "standard-version --release-as minor",
     "release:major": "standard-version --release-as major",
     "release:alpha": "standard-version --prerelease alpha",
     "release:beta": "standard-version --prerelease beta",
-    "release:dry": "standard-version --dry-run",
-    "publish": "node release.js auto",
-    "publish:patch": "node release.js patch",
-    "publish:minor": "node release.js minor",
-    "publish:major": "node release.js major",
-    "publish:dry": "node release.js dry"
+    "release:dry": "standard-version --dry-run"
   },
   "peerDependencies": {
     "tdesign-vue-next": "^1.14.2",
