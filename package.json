@@ -1,6 +1,6 @@
 {
   "name": "t-design-pro",
-  "version": "1.0.26",
+  "version": null,
   "type": "module",
   "types": "./dist/types/index.d.ts",
   "main": "./dist/index.umd.js",

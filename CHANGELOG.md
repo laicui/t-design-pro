@@ -5,19 +5,30 @@
 格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)，
 并且本项目遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
-## [未发布]
 
-### 新增
+## [](https://github.com/laicui/t-design-pro/compare/v1.0.26...v) (2025-08-28)
 
-- 待发布的新功能
 
-### 修改
+### 🐛 Bug 修复
 
-- 待发布的功能修改
+* 修复 publish.js 中 CHANGELOG.md 生成逻辑 ([8610946](https://github.com/laicui/t-design-pro/commit/8610946e92d19ed1ed582681542fec68af1f09a7))
 
-### 修复
 
-- 待发布的问题修复
+### ✨ 新功能
+
+* 添加 standard-version 自动化版本管理 ([7ef0b53](https://github.com/laicui/t-design-pro/commit/7ef0b53aa347669defaa98cf7a76c5f2397d6975))
+
+
+### ♻️ 代码重构
+
+* 简化发布流程，直接使用 standard-version ([6f1d688](https://github.com/laicui/t-design-pro/commit/6f1d688eff450d3f03d8666f4caa87bb7cf42afa))
+
+
+### 📝 文档更新
+
+* update CHANGELOG.md for v1.0.26 ([7dfa0a8](https://github.com/laicui/t-design-pro/commit/7dfa0a8f9c405b1c5d5bb0bcb6a3127b5d52b843))
+* 修复 RELEASE.md 中 Keep a Changelog 链接格式 ([51305c9](https://github.com/laicui/t-design-pro/commit/51305c9e6004a553b5ae29835665f2d3e3daca15))
+* 完善 standard-version 发布配置 ([70f7937](https://github.com/laicui/t-design-pro/commit/70f79375babfcd510070e64283acc607b002dbc7))
 
 ## [1.0.26] - 2025-08-28
 
