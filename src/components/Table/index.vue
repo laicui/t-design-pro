@@ -46,8 +46,6 @@
         :data="dataSource"
         :columns="formatColumns"
         :pagination="paginationComputed"
-        :selected-row-keys="selectedRowKeys || []"
-        @select-change="onSelectChange"
         @change="onChange"
       >
         <template v-if="slots.empty" #empty>
@@ -290,15 +288,6 @@ const restSearchForm = (params?: FormResetParams<any>) => {
 
 const appendTo: EnhancedTableInstanceFunctions['appendTo'] = (key, newData) => {
   tableRef.value?.appendTo(key, newData)
-}
-
-const emit = defineEmits(['select-change'])
-const selectedRowKeys = defineModel<Array<string | number>>('selectedRowKeys', {
-  default: () => []
-})
-const onSelectChange = (keys: Array<string | number>, options: any) => {
-  selectedRowKeys.value = keys
-  emit('select-change', keys, options)
 }
 
 defineExpose({

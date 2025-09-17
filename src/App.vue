@@ -5,8 +5,10 @@
       :columns="columns"
       row-key="id"
       :request="request"
-      :selectedRowKeys="selectedRowKeys"
-      @select-change="selectChange"
+      :table-props="{
+        selectedRowKeys,
+        onSelectChange: selectChange
+      }"
     >
       <template #tableHeaderCenter>
         <div>Center Header</div>
