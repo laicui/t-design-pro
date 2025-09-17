@@ -46,6 +46,8 @@
         :data="dataSource"
         :columns="formatColumns"
         :pagination="paginationComputed"
+        :selected-row-keys="selectedRowKeys || []"
+        @select-change="onSelectChange"
         @change="onChange"
       >
         <template v-if="slots.empty" #empty>
@@ -167,7 +169,6 @@ const formatColumns = computed(() => {
                 return enumValue
               }
             }
-
             // 处理 cellEmptyContent，可能是字符串或渲染函数
             const emptyContent = props.cellEmptyContent
             if (typeof emptyContent === 'function') {
@@ -290,6 +291,16 @@ const restSearchForm = (params?: FormResetParams<any>) => {
 const appendTo: EnhancedTableInstanceFunctions['appendTo'] = (key, newData) => {
   tableRef.value?.appendTo(key, newData)
 }
+
+const emit = defineEmits(['select-change'])
+const selectedRowKeys = defineModel<Array<string | number>>('selectedRowKeys', {
+  default: () => []
+})
+const onSelectChange = (keys: Array<string | number>, options: any) => {
+  selectedRowKeys.value = keys
+  emit('select-change', keys, options)
+}
+
 defineExpose({
   refresh,
   reset,

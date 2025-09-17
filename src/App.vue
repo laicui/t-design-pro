@@ -1,6 +1,13 @@
 <template>
   <div class="app-container">
-    <TablePro :columns="columns" row-key="id" :pagination="false" :request="request">
+    <TablePro
+      ref="tableProRef"
+      :columns="columns"
+      row-key="id"
+      :request="request"
+      :selectedRowKeys="selectedRowKeys"
+      @select-change="selectChange"
+    >
       <template #tableHeaderCenter>
         <div>Center Header</div>
       </template>
@@ -11,6 +18,11 @@
         <div>Right Header</div>
       </template>
     </TablePro>
+    <div style="margin: 20px 0">
+      <t-button @click="selectFirstTwo">选中前两行</t-button>
+      <t-button @click="clearSelection" style="margin-left: 8px">清空选择</t-button>
+      <span style="margin-left: 16px">已选ID: {{ selectedRowKeys }}</span>
+    </div>
   </div>
 </template>
 <script setup lang="ts">
@@ -28,6 +40,12 @@ interface UserTableRowData {
 }
 
 const columns = ref<ProTableCol<UserTableRowData>[]>([
+  {
+    colKey: 'row-select',
+    type: 'multiple',
+    width: 48,
+    fixed: 'left'
+  },
   {
     title: 'ID',
     colKey: 'id',
@@ -243,6 +261,20 @@ const data = ref([
     phone: '012-345-6789'
   }
 ])
+
+const selectedRowKeys = ref<Array<number>>([4, 5])
+const selectFirstTwo = () => {
+  selectedRowKeys.value = [1, 2]
+}
+const clearSelection = () => {
+  selectedRowKeys.value = []
+}
+
+const selectChange = (keys, options) => {
+  console.log(keys)
+  console.log(options)
+  selectedRowKeys.value = keys
+}
 </script>
 
 <style scoped lang="less">
