@@ -47,6 +47,9 @@ importers:
       sortablejs:
         specifier: ^1.15.6
         version: 1.15.6
+      tdesign-icons-vue-next:
+        specifier: ^0.4.1
+        version: 0.4.1(vue@3.5.18(typescript@5.7.3))
       tdesign-vue-next:
         specifier: ^1.14.2
         version: 1.15.1(vue@3.5.18(typescript@5.7.3))
@@ -2755,6 +2758,11 @@ packages:
 
   tdesign-icons-vue-next@0.3.6:
     resolution: {integrity: sha512-X9u90dBv8tPhfpguUyx+BzF8CU2ef2L4RXOO7MYOj1ufHCHwBXTF8L3GPfq6KZd/2u4vMLYAA8lGURn4PZZICw==}
+    peerDependencies:
+      vue: ^3.0.0
+
+  tdesign-icons-vue-next@0.4.1:
+    resolution: {integrity: sha512-uDPuTLRORnGcTyVGNoentNaK4V+ZcBmhYwcY3KqDaQQ5rrPeLMxu0ZVmgOEf0JtF2QZiqAxY7vodNEiLUdoRKA==}
     peerDependencies:
       vue: ^3.0.0
 
@@ -5913,6 +5921,11 @@ snapshots:
   tabbable@6.2.0: {}
 
   tdesign-icons-vue-next@0.3.6(vue@3.5.18(typescript@5.7.3)):
+    dependencies:
+      '@babel/runtime': 7.28.2
+      vue: 3.5.18(typescript@5.7.3)
+
+  tdesign-icons-vue-next@0.4.1(vue@3.5.18(typescript@5.7.3)):
     dependencies:
       '@babel/runtime': 7.28.2
       vue: 3.5.18(typescript@5.7.3)
