@@ -6,6 +6,19 @@
 并且本项目遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
 
+## [1.6.0](https://github.com/laicui/t-design-pro/compare/v1.5.1...v1.6.0) (2025-09-29)
+
+
+### ♻️ 代码重构
+
+* 重构表格选择功能 ([0244b9f](https://github.com/laicui/t-design-pro/commit/0244b9fcf2ad930d9390fafc7510cfd8da4b587c))
+
+
+### ✨ 新功能
+
+* 添加 CosUpload 组件，支持文件上传、图片排序和视频显示功能 ([cebe33b](https://github.com/laicui/t-design-pro/commit/cebe33b34f01392569a24cd0e3735a77e6077dba))
+* **table-pro:** 支持表格多选及 select-change 事件通讯 ([bde4cb7](https://github.com/laicui/t-design-pro/commit/bde4cb741333b689e8b107c976d2458e84a9ccbd))
+
 ### [1.5.1](https://github.com/laicui/t-design-pro/compare/v1.5.0...v1.5.1) (2025-08-28)
 
 
