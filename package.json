@@ -44,6 +44,7 @@
     "@vueuse/core": "^13.5.0",
     "array-move": "^4.0.0",
     "cos-js-sdk-v5": "^1.10.1",
+    "dayjs": "^1.11.18",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-prettier": "^5.5.1",
     "eslint-plugin-simple-import-sort": "^12.1.1",
