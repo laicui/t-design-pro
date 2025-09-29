@@ -3,10 +3,10 @@
     "baseUrl": "./",
     "target": "ES2022",
     "lib": ["ES2023", "DOM"],
-    "module": "ESNext",
+    "module": "NodeNext",
     "skipLibCheck": true,
     /* Bundler mode */
-    "moduleResolution": "node10",
+    "moduleResolution": "nodenext",
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
@@ -28,5 +28,14 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.d.ts", "src/**/*.vue", "src/vite-env.d.ts", "docs", "postcss.config.js", "src/components/types/index.ts"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.d.ts",
+    "src/**/*.vue",
+    "src/vite-env.d.ts",
+    "docs",
+    "postcss.config.js",
+    "src/components/types/index.ts"
+  ]
 }
