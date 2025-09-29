@@ -2,7 +2,7 @@ import { resolve } from 'path'
 import { fileURLToPath } from 'url'
 import { defineConfig } from 'vitepress'
 
-import pkg from '../../package.json' assert { type: 'json' }
+import pkg from '../../package.json' with { type: 'json' }
 
 const r = (path: string) => fileURLToPath(new URL(path, import.meta.url))
 
