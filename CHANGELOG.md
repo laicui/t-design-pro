@@ -6,6 +6,15 @@
 并且本项目遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
 
+## [1.8.0](https://github.com/laicui/t-design-pro/compare/v1.7.0...v1.8.0) (2025-09-29)
+
+
+### ✨ 新功能
+
+* 更新 tsconfig.json 配置，调整模块解析方式 ([f155d27](https://github.com/laicui/t-design-pro/commit/f155d2769147d124b5828cf1fb366f3e37e35f5f))
+* 添加 pnpm-workspace.yaml 文件，配置 onlyBuiltDependencies ([3783a6b](https://github.com/laicui/t-design-pro/commit/3783a6bf7fcae3117d6467eefaee80d28893195b))
+* 添加 tdesign-icons-vue-next 依赖，版本更新至 0.4.1 ([8c9e0b6](https://github.com/laicui/t-design-pro/commit/8c9e0b634e5f59ec5617ff93a8c271180e19d5de))
+
 ## [1.7.0](https://github.com/laicui/t-design-pro/compare/v1.6.0...v1.7.0) (2025-09-29)
 
 
