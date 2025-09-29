@@ -6,6 +6,13 @@
 并且本项目遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
 
+## [1.7.0](https://github.com/laicui/t-design-pro/compare/v1.6.0...v1.7.0) (2025-09-29)
+
+
+### ✨ 新功能
+
+* 添加 dayjs 依赖，更新至 1.11.18 版本 ([6af33f4](https://github.com/laicui/t-design-pro/commit/6af33f4c0cad36d3bb8d5a432ac66ff9b9952a48))
+
 ## [1.6.0](https://github.com/laicui/t-design-pro/compare/v1.5.1...v1.6.0) (2025-09-29)
 
 
