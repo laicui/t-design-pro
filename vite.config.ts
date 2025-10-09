@@ -9,7 +9,7 @@ import dts from 'vite-plugin-dts'
 
 const r = (path: string) => fileURLToPath(new URL(path, import.meta.url))
 const CWD = process.cwd()
-export default defineConfig((mode) => {
+export default defineConfig(({ mode }) => {
   const { VITE_SERVER_CENTER_API } = loadEnv(mode, CWD)
   console.log(VITE_SERVER_CENTER_API)
   return {

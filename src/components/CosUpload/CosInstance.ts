@@ -7,9 +7,7 @@ export type BucketType = 'private' | 'public'
 
 export default class CosInstance {
   private instance: COS
-  // laicui-public-prod-1312851603
   private Bucket: string
-  // 'ap-guangzhou'
   private Region: string
   getAuthorization: COS.COSOptions['getAuthorization']
 

@@ -3,10 +3,10 @@
     "baseUrl": "./",
     "target": "ES2022",
     "lib": ["ES2023", "DOM"],
-    "module": "NodeNext",
+    "module": "esnext",
     "skipLibCheck": true,
     /* Bundler mode */
-    "moduleResolution": "nodenext",
+    "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
