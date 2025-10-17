@@ -68,7 +68,10 @@ export default defineConfig({
       },
       '/components/': {
         base: '/components/',
-        items: [{ text: 'TablePro', link: 'table-pro/' }]
+        items: [
+          { text: 'TablePro', link: 'table-pro/' },
+          { text: 'CosUpload', link: 'cos-upload/' }
+        ]
       }
     },
 

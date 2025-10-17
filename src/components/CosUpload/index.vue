@@ -11,7 +11,7 @@
       :multiple="max > 1"
       :disabled="disabled || uploading"
       :trigger-button-props="{ theme: 'primary', variant: 'base' }"
-      :upload-button="{ uploading }"
+      :upload-button="{ loading: uploading }"
       :accept="props.accept"
       :show-image-file-name="false"
       v-bind="props.uploadExpandOptions"
@@ -87,7 +87,14 @@
 import { arrayMoveImmutable } from 'array-move'
 import dayjs from 'dayjs'
 import { UploadIcon } from 'tdesign-icons-vue-next'
-import { MessagePlugin, Upload, UploadInstanceFunctions } from 'tdesign-vue-next'
+import {
+  Button as TButton,
+  Loading as TLoading,
+  MessagePlugin,
+  Upload as TUpload,
+  Upload,
+  UploadInstanceFunctions
+} from 'tdesign-vue-next'
 import { computed, ComputedRef, ref } from 'vue'
 
 import { getVideoTime, isSizeWithinMax } from '@/utils/index'
