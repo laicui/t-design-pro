@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
     "target": "ES2022",
     "lib": ["ES2023", "DOM"],
     "module": "esnext",
@@ -18,8 +17,8 @@
     "jsx": "preserve",
     "jsxImportSource": "vue",
     "paths": {
-      "t-design-pro": ["src/index.ts"],
-      "@/*": ["src/*"]
+      "t-design-pro": ["./src/index.ts"],
+      "@/*": ["./src/*"]
     },
     /* Linting */
     "strict": true,

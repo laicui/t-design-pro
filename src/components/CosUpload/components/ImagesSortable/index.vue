@@ -36,14 +36,18 @@
 <script setup lang="ts">
 import Sortable from 'sortablejs'
 import { BrowseIcon, DeleteIcon } from 'tdesign-icons-vue-next'
+import {
+  Divider as TDivider,
+  ImageViewer as TImageViewer,
+  Loading as TLoading,
+  Space as TSpace
+} from 'tdesign-vue-next'
 import { computed, onMounted, ref, watch } from 'vue'
 
 const sortableRef = ref<any>(null)
 const sortableInstance = ref(null)
 const sorting = ref(false)
 onMounted(() => {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error
   sortableInstance.value = new Sortable(sortableRef.value, {
     disabled: props.disabled,
     animation: 150,
@@ -53,8 +57,7 @@ onMounted(() => {
     },
     onEnd: (evt) => {
       sorting.value = false
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
+
       sortEnd({ oldIndex: evt.oldIndex, newIndex: evt.newIndex })
     }
   })

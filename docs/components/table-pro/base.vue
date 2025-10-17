@@ -15,8 +15,22 @@
 </template>
 
 <script setup lang="ts">
-import { type ProTableCol, TablePro } from 't-design-pro'
-import { ref } from 'vue'
+import type { ProTableCol } from 't-design-pro'
+import { TablePro } from 't-design-pro'
+import { useData } from 'vitepress'
+import { ref, watch } from 'vue'
+
+const { isDark } = useData()
+
+watch(
+  isDark,
+  (newVal) => {
+    document.documentElement.setAttribute('theme-mode', newVal ? 'dark' : 'light')
+  },
+  {
+    immediate: true
+  }
+)
 
 const columns = ref<ProTableCol[]>([
   {
