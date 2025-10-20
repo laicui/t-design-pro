@@ -35,6 +35,7 @@
     "src/vite-env.d.ts",
     "docs",
     "postcss.config.js",
-    "src/components/types/index.ts"
+    "src/components/types/index.ts",
+    "node_modules/tdesign-vue-next/global.d.ts"
   ]
 }

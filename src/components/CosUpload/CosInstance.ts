@@ -13,6 +13,8 @@ export default class CosInstance {
 
   constructor(options: CreateCosInstanceOptions) {
     if (!options || !options.Bucket || !options.Region || !options.getAuthorization) {
+      console.log(options)
+
       throw new Error('请传入完整的cosOptions参数')
     }
     this.Bucket = options.Bucket
