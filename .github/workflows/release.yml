@@ -1,5 +1,9 @@
 name: Release and Publish to NPM
 
+permissions:
+  id-token: write # Required for OIDC
+  contents: read
+
 on:
   release:
     types: [published]
@@ -14,8 +18,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          registry-url: 'https://registry.npmjs.org'
+          node-version: "20"
+          registry-url: "https://registry.npmjs.org"
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
@@ -35,7 +39,7 @@ jobs:
           TAG_VERSION=${GITHUB_REF#refs/tags/v}
           echo "Package version: $PACKAGE_VERSION"
           echo "Tag version: $TAG_VERSION"
-          
+
           if [ "$PACKAGE_VERSION" != "$TAG_VERSION" ]; then
             echo "❌ 版本不匹配! Package: $PACKAGE_VERSION, Tag: $TAG_VERSION"
             exit 1
@@ -43,7 +47,7 @@ jobs:
             echo "✅ 版本匹配"
           fi
 
+      - name: Update npm
+        run: npm install -g npm@latest
       - name: Publish to NPM
         run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.PUBLISH_NPM_TOKEN }}
