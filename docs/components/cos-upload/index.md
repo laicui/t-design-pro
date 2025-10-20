@@ -6,7 +6,6 @@ next: false
 import BaseUpload from './base.vue'
 import ThemeUpload from './theme.vue'
 import UtilsUpload from './utils.vue'
-import DemoPreview from '../DemoPreview.vue'
 </script>
 
 # CosUpload 腾讯云上传组件
@@ -66,71 +65,71 @@ import DemoPreview from '../DemoPreview.vue'
 
 ### Props
 
-| 参数 | 说明 | 类型 | 默认值 |
-|------|------|------|--------|
-| modelValue | 已上传文件列表，支持 v-model | `Array<any>` | `[]` |
-| theme | 上传组件主题 | `string` | `'file'` |
-| max | 最大上传数量 | `number` | `1` |
-| abridgeName | 文件名省略配置 [前缀保留, 后缀保留] | `Array<number>` | - |
-| path | 上传路径（必填） | `string` | - |
-| poster | 视频封面（theme 为 video 时有效） | `Array<any>` | - |
-| disabled | 是否禁用 | `boolean` | `false` |
-| uploadExpandOptions | t-upload 其他支持的属性 | `object` | `{}` |
-| maxFileSize | 文件大小限制 | `{ size: number; unit: 'B' \| 'KB' \| 'MB' \| 'GB' }` | - |
-| ossExtendOptions | COS 扩展配置 | `Omit<COS.UploadFileParams, omitOssOptions>` | - |
-| accept | 接受的文件类型 | `string` | - |
-| pictureHandleRule | 图片处理规则 | `string` | - |
-| loading | 上传加载状态，支持 v-model:loading | `boolean` | `false` |
-| loadingAttach | 加载遮罩挂载位置 | `boolean \| string` | `false` |
-| size | 组件尺寸 | `'small' \| 'default'` | `'default'` |
-| videoMaxduration | 视频最大时长（秒） | `number` | - |
-| cosOptions | COS 配置（必填） | `CreateCosInstanceOptions` | - |
+| 参数                | 说明                                | 类型                                                  | 默认值      |
+| ------------------- | ----------------------------------- | ----------------------------------------------------- | ----------- |
+| modelValue          | 已上传文件列表，支持 v-model        | `Array<any>`                                          | `[]`        |
+| theme               | 上传组件主题                        | `string`                                              | `'file'`    |
+| max                 | 最大上传数量                        | `number`                                              | `1`         |
+| abridgeName         | 文件名省略配置 [前缀保留, 后缀保留] | `Array<number>`                                       | -           |
+| path                | 上传路径（必填）                    | `string`                                              | -           |
+| poster              | 视频封面（theme 为 video 时有效）   | `Array<any>`                                          | -           |
+| disabled            | 是否禁用                            | `boolean`                                             | `false`     |
+| uploadExpandOptions | t-upload 其他支持的属性             | `object`                                              | `{}`        |
+| maxFileSize         | 文件大小限制                        | `{ size: number; unit: 'B' \| 'KB' \| 'MB' \| 'GB' }` | -           |
+| ossExtendOptions    | COS 扩展配置                        | `Omit<COS.UploadFileParams, omitOssOptions>`          | -           |
+| accept              | 接受的文件类型                      | `string`                                              | -           |
+| pictureHandleRule   | 图片处理规则                        | `string`                                              | -           |
+| loading             | 上传加载状态，支持 v-model:loading  | `boolean`                                             | `false`     |
+| loadingAttach       | 加载遮罩挂载位置                    | `boolean \| string`                                   | `false`     |
+| size                | 组件尺寸                            | `'small' \| 'default'`                                | `'default'` |
+| videoMaxduration    | 视频最大时长（秒）                  | `number`                                              | -           |
+| cosOptions          | COS 配置（必填）                    | `CreateCosInstanceOptions`                            | -           |
 
 ### CreateCosInstanceOptions COS 配置
 
-| 参数 | 说明 | 类型 | 必填 |
-|------|------|------|------|
-| Bucket | COS 存储桶名称 | `string` | 是 |
-| Region | COS 地域 | `string` | 是 |
-| getAuthorization | 获取临时密钥的方法 | `COS.COSOptions['getAuthorization']` | 是 |
+| 参数             | 说明               | 类型                                 | 必填 |
+| ---------------- | ------------------ | ------------------------------------ | ---- |
+| Bucket           | COS 存储桶名称     | `string`                             | 是   |
+| Region           | COS 地域           | `string`                             | 是   |
+| getAuthorization | 获取临时密钥的方法 | `COS.COSOptions['getAuthorization']` | 是   |
 
 ### 主题类型说明
 
-| 主题值 | 说明 | 特性 |
-|--------|------|------|
-| `'file'` | 文件上传 | 基础文件上传，显示文件信息 |
-| `'image'` | 图片上传 | 图片预览模式 |
-| `'file-input'` | 输入框模式 | 简洁的输入框上传 |
-| `'file-flow'` | 文件流式 | 文件列表流式布局 |
-| `'image-flow'` | 图片流式 | 图片列表流式布局 |
-| `'image-sortable'` | 图片排序 | 支持拖拽排序的图片列表 |
-| `'video'` | 视频上传 | 视频上传和预览，支持封面选择 |
-| `'files-list'` | 文件列表 | 详细的文件列表展示 |
-| `'audio'` | 音频上传 | 音频文件上传（本地预览） |
-| `'custom'` | 自定义 | 通过默认插槽自定义上传按钮 |
+| 主题值             | 说明       | 特性                         |
+| ------------------ | ---------- | ---------------------------- |
+| `'file'`           | 文件上传   | 基础文件上传，显示文件信息   |
+| `'image'`          | 图片上传   | 图片预览模式                 |
+| `'file-input'`     | 输入框模式 | 简洁的输入框上传             |
+| `'file-flow'`      | 文件流式   | 文件列表流式布局             |
+| `'image-flow'`     | 图片流式   | 图片列表流式布局             |
+| `'image-sortable'` | 图片排序   | 支持拖拽排序的图片列表       |
+| `'video'`          | 视频上传   | 视频上传和预览，支持封面选择 |
+| `'files-list'`     | 文件列表   | 详细的文件列表展示           |
+| `'audio'`          | 音频上传   | 音频文件上传（本地预览）     |
+| `'custom'`         | 自定义     | 通过默认插槽自定义上传按钮   |
 
 ### 方法
 
-| 方法名 | 说明 | 参数 | 返回值 |
-|--------|------|------|--------|
-| uploadFiles | 手动触发文件上传 | `(files: File[])` | - |
+| 方法名      | 说明             | 参数              | 返回值 |
+| ----------- | ---------------- | ----------------- | ------ |
+| uploadFiles | 手动触发文件上传 | `(files: File[])` | -      |
 
 ### 事件
 
-| 事件名 | 说明 | 参数 |
-|--------|------|------|
-| update:modelValue | 文件列表变化时触发 | `(value: Array<any>)` |
-| update:loading | 上传状态变化时触发 | `(loading: boolean)` |
-| updatePoster | 视频封面更新时触发 | `(poster: Array<any>)` |
-| uploadSuccess | 单个文件上传成功时触发 | `(file: any)` |
+| 事件名            | 说明                   | 参数                   |
+| ----------------- | ---------------------- | ---------------------- |
+| update:modelValue | 文件列表变化时触发     | `(value: Array<any>)`  |
+| update:loading    | 上传状态变化时触发     | `(loading: boolean)`   |
+| updatePoster      | 视频封面更新时触发     | `(poster: Array<any>)` |
+| uploadSuccess     | 单个文件上传成功时触发 | `(file: any)`          |
 
 ### 插槽
 
-| 插槽名 | 说明 | 参数 |
-|--------|------|------|
-| default | 自定义上传按钮（theme 为 custom 时） | - |
-| filesListButtonTitle | 文件列表上传按钮文字 | - |
-| imageCoverIcon | 图片覆盖层图标 | `{ item: any }` |
+| 插槽名               | 说明                                 | 参数            |
+| -------------------- | ------------------------------------ | --------------- |
+| default              | 自定义上传按钮（theme 为 custom 时） | -               |
+| filesListButtonTitle | 文件列表上传按钮文字                 | -               |
+| imageCoverIcon       | 图片覆盖层图标                       | `{ item: any }` |
 
 ## 工具函数
 
@@ -146,20 +145,20 @@ const result = await uploadFileToCos(options, file)
 
 #### 参数
 
-| 参数 | 说明 | 类型 |
-|------|------|------|
-| options | 上传配置 | `uploadFileToCosOptions` |
-| file | 要上传的文件 | `File` |
+| 参数    | 说明         | 类型                     |
+| ------- | ------------ | ------------------------ |
+| options | 上传配置     | `uploadFileToCosOptions` |
+| file    | 要上传的文件 | `File`                   |
 
 #### uploadFileToCosOptions
 
-| 参数 | 说明 | 类型 | 必填 |
-|------|------|------|------|
-| Bucket | COS 存储桶名称 | `string` | 是 |
-| Region | COS 地域 | `string` | 是 |
-| path | 上传路径 | `string` | 是 |
-| getAuthorization | 获取临时密钥的方法 | `Function` | 是 |
-| onProgress | 上传进度回调 | `(progressData: COS.ProgressInfo) => void` | 否 |
+| 参数             | 说明               | 类型                                       | 必填 |
+| ---------------- | ------------------ | ------------------------------------------ | ---- |
+| Bucket           | COS 存储桶名称     | `string`                                   | 是   |
+| Region           | COS 地域           | `string`                                   | 是   |
+| path             | 上传路径           | `string`                                   | 是   |
+| getAuthorization | 获取临时密钥的方法 | `Function`                                 | 是   |
+| onProgress       | 上传进度回调       | `(progressData: COS.ProgressInfo) => void` | 否   |
 
 ## 高级用法
 
@@ -173,7 +172,7 @@ export default async function getAuthorization(options, callback) {
     method: 'POST',
     body: JSON.stringify({
       bucket: options.Bucket,
-      region: options.Region,
+      region: options.Region
     })
   })
 
@@ -183,7 +182,7 @@ export default async function getAuthorization(options, callback) {
     TmpSecretId: data.credentials.tmpSecretId,
     TmpSecretKey: data.credentials.tmpSecretKey,
     SecurityToken: data.credentials.sessionToken,
-    ExpiredTime: data.expiredTime,
+    ExpiredTime: data.expiredTime
   })
 }
 ```
@@ -239,12 +238,7 @@ export default async function getAuthorization(options, callback) {
 
 ```vue
 <template>
-  <CosUpload
-    v-model="files"
-    theme="custom"
-    :cos-options="cosOptions"
-    path="/uploads/"
-  >
+  <CosUpload v-model="files" theme="custom" :cos-options="cosOptions" path="/uploads/">
     <t-button theme="primary" variant="outline">
       <template #icon><cloud-upload-icon /></template>
       点击上传
@@ -308,10 +302,7 @@ const handleSuccess = (file) => {
 在 path 中使用固定的文件名：
 
 ```vue
-<CosUpload
-  :cos-options="cosOptions"
-  :path="`/uploads/avatar_${userId}.jpg`"
-/>
+<CosUpload :cos-options="cosOptions" :path="`/uploads/avatar_${userId}.jpg`" />
 ```
 
 ### 3. 如何限制文件类型？
@@ -319,10 +310,7 @@ const handleSuccess = (file) => {
 使用 `accept` 属性：
 
 ```vue
-<CosUpload
-  accept="image/png,image/jpeg"
-  :cos-options="cosOptions"
-/>
+<CosUpload accept="image/png,image/jpeg" :cos-options="cosOptions" />
 ```
 
 ### 4. 如何自定义文件名？

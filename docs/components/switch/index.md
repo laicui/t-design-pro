@@ -6,7 +6,6 @@ next: false
 import BaseSwitch from './base.vue'
 import AsyncSwitch from './async.vue'
 import CustomValueSwitch from './custom-value.vue'
-import DemoPreview from '../DemoPreview.vue'
 </script>
 
 # SwitchPro 开关组件
@@ -62,12 +61,12 @@ import DemoPreview from '../DemoPreview.vue'
 
 ### Props
 
-| 参数 | 说明 | 类型 | 默认值 |
-|------|------|------|--------|
-| modelValue | 开关值，支持 v-model | `SwitchValue` | - |
+| 参数        | 说明                                    | 类型                         | 默认值          |
+| ----------- | --------------------------------------- | ---------------------------- | --------------- |
+| modelValue  | 开关值，支持 v-model                    | `SwitchValue`                | -               |
 | customValue | 自定义开关值 `[打开时的值, 关闭时的值]` | `[SwitchValue, SwitchValue]` | `[true, false]` |
-| request | 异步请求函数，返回 Promise | `() => Promise<boolean>` | - |
-| ...其他属性 | 支持 TDesign Switch 的所有原生属性 | - | - |
+| request     | 异步请求函数，返回 Promise              | `() => Promise<boolean>`     | -               |
+| ...其他属性 | 支持 TDesign Switch 的所有原生属性      | -                            | -               |
 
 ### 类型定义
 
@@ -85,9 +84,9 @@ interface SwitchProProps {
 
 ### Events
 
-| 事件名 | 说明 | 参数 |
-|--------|------|------|
-| change | 开关状态改变时触发 | `(value: SwitchValue)` |
+| 事件名            | 说明                  | 参数                   |
+| ----------------- | --------------------- | ---------------------- |
+| change            | 开关状态改变时触发    | `(value: SwitchValue)` |
 | update:modelValue | 用于 v-model 双向绑定 | `(value: SwitchValue)` |
 
 ## 使用场景
@@ -96,10 +95,7 @@ interface SwitchProProps {
 
 ```vue
 <template>
-  <SwitchPro
-    v-model="enabled"
-    :request="toggleStatus"
-  />
+  <SwitchPro v-model="enabled" :request="toggleStatus" />
 </template>
 
 <script setup>
@@ -124,10 +120,7 @@ const toggleStatus = async () => {
 
 ```vue
 <template>
-  <SwitchPro
-    v-model="status"
-    :custom-value="[1, 0]"
-  />
+  <SwitchPro v-model="status" :custom-value="[1, 0]" />
 </template>
 
 <script setup>
@@ -142,10 +135,7 @@ const status = ref(0) // 0: 关闭, 1: 打开
 
 ```vue
 <template>
-  <SwitchPro
-    v-model="deleteMode"
-    :request="confirmDelete"
-  />
+  <SwitchPro v-model="deleteMode" :request="confirmDelete" />
 </template>
 
 <script setup>
@@ -178,10 +168,10 @@ const confirmDelete = async () => {
 
 ## 与 TDesign Switch 的区别
 
-| 特性 | TDesign Switch | SwitchPro |
-|------|---------------|-----------|
-| 基础开关功能 | ✅ | ✅ |
-| 异步请求支持 | ❌ | ✅ |
-| 自动加载状态 | ❌ | ✅ |
-| 请求失败回滚 | ❌ | ✅ |
-| beforeChange 简化 | 需手动实现 | 内置支持 |
+| 特性              | TDesign Switch | SwitchPro |
+| ----------------- | -------------- | --------- |
+| 基础开关功能      | ✅             | ✅        |
+| 异步请求支持      | ❌             | ✅        |
+| 自动加载状态      | ❌             | ✅        |
+| 请求失败回滚      | ❌             | ✅        |
+| beforeChange 简化 | 需手动实现     | 内置支持  |
