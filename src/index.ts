@@ -1,6 +1,7 @@
 import { App } from 'vue'
 
 import CosUpload from './components/CosUpload/index.vue'
+import SwitchPro from './components/Switch/index.vue'
 import TablePro from './components/Table/index.vue'
 
 // 自动遍历 components 文件夹的方法
@@ -33,10 +34,11 @@ const install = (app: App) => {
 const TDesignPro = {
   install,
   TablePro,
-  CosUpload
+  CosUpload,
+  SwitchPro
 }
 
-export { CosUpload, install, TablePro }
+export { CosUpload, install, SwitchPro, TablePro }
 export * from './components/types/index'
 export * from './components/utils/index'
 export default TDesignPro
