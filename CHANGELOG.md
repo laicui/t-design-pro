@@ -6,6 +6,32 @@
 并且本项目遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
 
+## [1.9.0](https://github.com/laicui/t-design-pro/compare/v1.8.0...v1.9.0) (2025-10-20)
+
+
+### 📝 文档更新
+
+* 添加 CosUpload 组件完整文档 ([9aadc1e](https://github.com/laicui/t-design-pro/commit/9aadc1e879feca34186e15de974f7754fa42b1e0))
+
+
+### 🐛 Bug 修复
+
+* 修复动态组件渲染问题 ([4504735](https://github.com/laicui/t-design-pro/commit/4504735d1fe7c9a34cd83c5c66385134a27677a2))
+
+
+### ✨ 新功能
+
+* 添加 SwitchPro 组件及完整文档 ([a35a1f7](https://github.com/laicui/t-design-pro/commit/a35a1f738ead1ccfa9160ac82b2c96ee04487672))
+
+
+### 🔧 构建/工具
+
+* 优化路由配置和添加开发调试页面 ([8bec849](https://github.com/laicui/t-design-pro/commit/8bec849ee23ac0d4959909a7983936cc4f3798da))
+* 优化配置文件和代码清理 ([2b5c8aa](https://github.com/laicui/t-design-pro/commit/2b5c8aa339264fdf3a5b40eae257288c4e94374f))
+* 更新 pnpm 版本至 10 ([f63ecf6](https://github.com/laicui/t-design-pro/commit/f63ecf6c1fd4d7cd3ef46a35699f5c52a9f51648))
+* 更新文档格式，调整表格和开关组件的属性说明 ([f8fa722](https://github.com/laicui/t-design-pro/commit/f8fa722fd7e76262efc042e9b542326a9def950b))
+* 添加 .env 文件及基本配置 ([5caa6f5](https://github.com/laicui/t-design-pro/commit/5caa6f576bc898017b5040582f75f1057a58629a))
+
 ## [1.8.0](https://github.com/laicui/t-design-pro/compare/v1.7.0...v1.8.0) (2025-09-29)
 
 
