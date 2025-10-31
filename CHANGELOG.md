@@ -6,6 +6,23 @@
 并且本项目遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
 
+## [1.10.0](https://github.com/laicui/t-design-pro/compare/v1.9.0...v1.10.0) (2025-10-31)
+
+
+### 📝 文档更新
+
+* 更新开发指南，添加发布版本说明 ([4baac3d](https://github.com/laicui/t-design-pro/commit/4baac3d7fcbc67f4d7e115785673bda5c6218857))
+
+
+### 🔧 构建/工具
+
+* 更新Node.js版本至20并添加权限配置 ([4b2b068](https://github.com/laicui/t-design-pro/commit/4b2b068a4959107c624878f6b81d61c695cdeffd))
+
+
+### ✨ 新功能
+
+* 添加国际化(i18n)支持 ([b4b88b2](https://github.com/laicui/t-design-pro/commit/b4b88b225c0cf757d60c91addbf11942c2429e6d))
+
 ## [1.9.0](https://github.com/laicui/t-design-pro/compare/v1.8.0...v1.9.0) (2025-10-20)
 
 
