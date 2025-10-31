@@ -1,0 +1,17 @@
+{
+  "select": {
+    "date": {
+      "time": {
+        "end": "請選擇結束時間",
+        "start": "請選擇開始時間",
+        "tips": "請選擇日期"
+      }
+    }
+  },
+  "table": {
+    "button": {
+      "collapse": "收起",
+      "expand": "展開"
+    }
+  }
+}

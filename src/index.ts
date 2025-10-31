@@ -1,5 +1,6 @@
 import { App } from 'vue'
 
+import ConfigProviderPro from './components/ConfigProvider/index.vue'
 import CosUpload from './components/CosUpload/index.vue'
 import SwitchPro from './components/Switch/index.vue'
 import TablePro from './components/Table/index.vue'
@@ -35,10 +36,11 @@ const TDesignPro = {
   install,
   TablePro,
   CosUpload,
-  SwitchPro
+  SwitchPro,
+  ConfigProviderPro
 }
 
-export { CosUpload, install, SwitchPro, TablePro }
+export { ConfigProviderPro, CosUpload, install, SwitchPro, TablePro }
 export * from './components/types/index'
 export * from './components/utils/index'
 export default TDesignPro

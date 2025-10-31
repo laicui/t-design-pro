@@ -34,16 +34,20 @@
               type="submit"
               :style="{ marginLeft: 'var(--td-comp-margin-s)' }"
             >
-              搜索
+              {{ t('common.button.search') }}
             </t-button>
-            <t-button type="reset" variant="base" theme="default"> 重置 </t-button>
+            <t-button type="reset" variant="base" theme="default">
+              {{ t('common.button.reset') }}
+            </t-button>
             <t-link
               v-if="colsCount - 1 < formItems.length"
               theme="primary"
               hover="color"
               @click="toggleDisplayFormItem"
             >
-              <span>{{ showAllFormItem ? '收起' : '展开' }}</span>
+              <span>{{
+                showAllFormItem ? `${t('common.lang')}` : `${t('components.table.button.expand')}`
+              }}</span>
               <t-icon :name="showAllFormItem ? 'chevron-up' : 'chevron-down'" />
             </t-link>
           </t-space>
@@ -73,7 +77,10 @@ import {
 import type { VNode } from 'vue'
 import { computed, ref, watchEffect } from 'vue'
 
+import { useLocalLang } from '@/locales'
+
 import { ProTableCol, SearchFormProps, SearchValueType } from './types'
+const { t } = useLocalLang()
 
 // 组件映射对象，将字符串映射到实际组件
 const componentMap = {
@@ -199,7 +206,7 @@ const formItemCols = computed(() => {
 
 const getPlaceholder = (formItem: ProTableCol): string | string[] => {
   if (typeof formItem.search !== 'object') {
-    return `请输入${formItem.title}`
+    return `${t('common.input.tips')}${formItem.title}`
   }
   const fieldProps = formItem.search.fieldProps || {}
   const { placeholder } = fieldProps
@@ -208,13 +215,16 @@ const getPlaceholder = (formItem: ProTableCol): string | string[] => {
   }
   switch (formItem.search.valueType) {
     case 't-date-range-picker':
-      return ['请选择开始时间', '请选择结束时间']
+      return [
+        `${t('components.select.date.time.start')}`,
+        `${t('components.select.date.time.end')}`
+      ]
     case 't-date-picker':
-      return `请选择日期`
+      return `${t('components.select.date.time.tips')}`
     case 't-select':
-      return `请选择${formItem.search.label || transformTitleToLabel(formItem.title)}`
+      return `${t('common.select.tips')}${formItem.search.label || transformTitleToLabel(formItem.title)}`
     default:
-      return `请输入${formItem.search.label || transformTitleToLabel(formItem.title)}`
+      return `${formItem.search.label || transformTitleToLabel(formItem.title)}`
   }
 }
 

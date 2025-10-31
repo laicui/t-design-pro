@@ -1,0 +1,13 @@
+{
+  "button": {
+    "reset": "重置",
+    "search": "搜尋"
+  },
+  "input": {
+    "tips": "請輸入"
+  },
+  "lang": "繁體中文",
+  "select": {
+    "tips": "請選擇"
+  }
+}
