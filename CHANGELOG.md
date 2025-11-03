@@ -6,6 +6,13 @@
 并且本项目遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
 
+### [1.10.1](https://github.com/laicui/t-design-pro/compare/v1.10.0...v1.10.1) (2025-11-03)
+
+
+### 📝 文档更新
+
+* 添加 ConfigProvider 组件文档和示例 ([2505cc8](https://github.com/laicui/t-design-pro/commit/2505cc83f4569b780b55fbbbec405f42308f44ba))
+
 ## [1.10.0](https://github.com/laicui/t-design-pro/compare/v1.9.0...v1.10.0) (2025-10-31)
 
 
