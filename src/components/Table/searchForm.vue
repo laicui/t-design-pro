@@ -46,7 +46,9 @@
               @click="toggleDisplayFormItem"
             >
               <span>{{
-                showAllFormItem ? `${t('common.lang')}` : `${t('components.table.button.expand')}`
+                showAllFormItem
+                  ? `${t('components.table.button.collapse')}`
+                  : `${t('components.table.button.expand')}`
               }}</span>
               <t-icon :name="showAllFormItem ? 'chevron-up' : 'chevron-down'" />
             </t-link>
