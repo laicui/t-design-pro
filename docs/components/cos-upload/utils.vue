@@ -19,7 +19,10 @@
           </t-button>
         </div>
 
-        <div v-if="uploadProgress > 0 && uploadProgress < 100" class="progress-bar">
+        <div
+          v-if="uploadProgress > 0 && uploadProgress < 100"
+          class="progress-bar"
+        >
           <t-progress :percentage="uploadProgress" />
           <span class="progress-text">上传中 {{ uploadProgress }}%</span>
         </div>
@@ -31,7 +34,9 @@
           <div class="image-info">
             <p><strong>文件URL：</strong></p>
             <t-input v-model="imageSrc" readonly :tips="imageSrc" />
-            <t-button size="small" variant="text" @click="copyUrl"> 复制链接 </t-button>
+            <t-button size="small" variant="text" @click="copyUrl">
+              复制链接
+            </t-button>
           </div>
         </div>
 
@@ -68,14 +73,26 @@
 
         <div v-if="multiLoading" class="uploading-list">
           <h5>上传队列：</h5>
-          <div v-for="(file, index) in uploadingFiles" :key="index" class="uploading-item">
+          <div
+            v-for="(file, index) in uploadingFiles"
+            :key="index"
+            class="uploading-item"
+          >
             <span class="file-name">{{ file.name }}</span>
-            <t-progress :percentage="file.progress || 0" size="small" style="flex: 1" />
+            <t-progress
+              :percentage="file.progress || 0"
+              size="small"
+              style="flex: 1"
+            />
           </div>
         </div>
 
         <div v-if="multiFiles.length > 0" class="files-grid">
-          <div v-for="(file, index) in multiFiles" :key="index" class="file-card">
+          <div
+            v-for="(file, index) in multiFiles"
+            :key="index"
+            class="file-card"
+          >
             <img :src="file.url" alt="" />
             <t-button
               size="small"
@@ -131,7 +148,12 @@
 
 <script setup lang="ts">
 import { uploadFileToCos } from 't-design-pro'
-import { CloseIcon, FolderAddIcon, ImageIcon, UploadIcon } from 'tdesign-icons-vue-next'
+import {
+  CloseIcon,
+  FolderAddIcon,
+  ImageIcon,
+  UploadIcon
+} from 'tdesign-icons-vue-next'
 import {
   Alert as TAlert,
   Button as TButton,
@@ -152,7 +174,10 @@ const { isDark } = useData()
 watch(
   isDark,
   (newVal) => {
-    document.documentElement.setAttribute('theme-mode', newVal ? 'dark' : 'light')
+    document.documentElement.setAttribute(
+      'theme-mode',
+      newVal ? 'dark' : 'light'
+    )
   },
   {
     immediate: true
@@ -267,7 +292,10 @@ async function handleMultiFileUpload() {
   })
 
   const results = await Promise.all(uploadPromises)
-  const successFiles = results.filter(Boolean) as Array<{ url: string; name: string }>
+  const successFiles = results.filter(Boolean) as Array<{
+    url: string
+    name: string
+  }>
 
   multiFiles.value.push(...successFiles)
   MessagePlugin.success(`成功上传 ${successFiles.length} 个文件`)
@@ -309,7 +337,8 @@ async function handleProcessFileUpload() {
         processRule = '?imageMogr2/thumbnail/500x500'
         break
       case 'watermark':
-        processRule = '?watermark/2/text/VCBEZXNpZ24gUHJv/fill/I0ZGRkZGRg/fontsize/20/dissolve/50'
+        processRule =
+          '?watermark/2/text/VCBEZXNpZ24gUHJv/fill/I0ZGRkZGRg/fontsize/20/dissolve/50'
         break
       case 'compress':
         processRule = '?imageMogr2/quality/60'

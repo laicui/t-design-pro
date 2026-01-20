@@ -7,7 +7,10 @@ import {
 } from 'tdesign-vue-next'
 import { VNode } from 'vue'
 
-type PickTableTreeProps = 'tree' | 'onExpandedTreeNodesChange' | 'treeExpandAndFoldIcon'
+type PickTableTreeProps =
+  | 'tree'
+  | 'onExpandedTreeNodesChange'
+  | 'treeExpandAndFoldIcon'
 
 type PickPrimaryTableProps =
   | 'rowKey'
@@ -34,7 +37,8 @@ export interface ProTableProps<T extends TableRowData = TableRowData>
 }
 
 type customColKey = 'operation' | 'row-select'
-export interface ProTableCol<T extends TableRowData = any> extends PrimaryTableCol<T> {
+export interface ProTableCol<T extends TableRowData = any>
+  extends PrimaryTableCol<T> {
   colKey: keyof T extends string ? keyof T | customColKey : string
   hidden?: boolean
   search?: ProTableColSearchType | boolean
@@ -56,6 +60,18 @@ export interface ProTableColSearchType {
   valueType?: SearchValueType
   valueEnum?: { [key: string]: any }
   render?: () => VNode
+
+  /** 动态字段配置，用于在一个搜索框中切换不同字段 */
+  dynamicFields?: Array<{
+    key: string
+    label: string
+    valueType?: SearchValueType
+    fieldProps?: { [key: string]: any }
+    valueEnum?: { [key: string]: any }
+  }>
+
+  /** 动态字段的默认选中字段 key */
+  defaultFieldKey?: string
 }
 
 export interface SearchFormProps extends Pick<FormProps, 'resetType'> {

@@ -72,14 +72,26 @@ import RequestTable from './request.vue'
 
 ### ProTableColSearchType 搜索配置
 
-| 参数       | 说明                          | 类型                  | 默认值      |
-| ---------- | ----------------------------- | --------------------- | ----------- |
-| key        | 搜索字段名（默认使用 colKey） | `string`              | -           |
-| label      | 搜索表单标签                  | `string`              | -           |
-| valueType  | 搜索组件类型                  | `SearchValueType`     | `'t-input'` |
-| valueEnum  | 选择器选项枚举                | `Record<string, any>` | -           |
-| fieldProps | 组件属性                      | `Record<string, any>` | -           |
-| render     | 自定义渲染搜索组件            | `() => VNode`         | -           |
+| 参数            | 说明                          | 类型                               | 默认值      |
+| --------------- | ----------------------------- | ---------------------------------- | ----------- |
+| key             | 搜索字段名（默认使用 colKey） | `string`                           | -           |
+| label           | 搜索表单标签                  | `string`                           | -           |
+| valueType       | 搜索组件类型                  | `SearchValueType`                  | `'t-input'` |
+| valueEnum       | 选择器选项枚举                | `Record<string, any>`              | -           |
+| fieldProps      | 组件属性                      | `Record<string, any>`              | -           |
+| render          | 自定义渲染搜索组件            | `() => VNode`                      | -           |
+| dynamicFields   | 动态字段配置                  | `DynamicFieldItem[]`               | -           |
+| defaultFieldKey | 默认选中的动态字段key         | `string`                           | -           |
+
+#### DynamicFieldItem 动态字段配置
+
+| 参数       | 说明               | 类型                  | 默认值      |
+| ---------- | ------------------ | --------------------- | ----------- |
+| key        | 字段标识符         | `string`              | -           |
+| label      | 字段显示名称       | `string`              | -           |
+| valueType  | 该字段的输入类型   | `SearchValueType`     | `'t-input'` |
+| fieldProps | 该字段的输入属性   | `Record<string, any>` | -           |
+| valueEnum  | 该字段的枚举值     | `Record<string, any>` | -           |
 
 ### SearchValueType 搜索组件类型
 
@@ -176,6 +188,48 @@ const columns = [
 ]
 </script>
 ```
+
+### 动态字段搜索
+
+支持在一个搜索项中动态切换不同的字段进行搜索，适用于需要灵活搜索的场景。
+
+```vue
+<script setup>
+const columns = [
+  {
+    title: '动态搜索',
+    colKey: 'dynamicSearch',
+    search: {
+      dynamicFields: [
+        { key: 'name', label: '姓名', valueType: 't-input' },
+        { key: 'phone', label: '手机号', valueType: 't-input' },
+        { key: 'email', label: '邮箱', valueType: 't-input' },
+        { key: 'status', label: '状态', valueType: 't-select', valueEnum: { '1': '启用', '0': '禁用' } }
+      ]
+    }
+  }
+]
+
+// 搜索时，参数格式为：{ 'dynamicSearch.name': '张三' }
+const fetchData = async (params) => {
+  // params 包含：{ 'dynamicSearch.name': '张三' } 或 { 'dynamicSearch.phone': '13800138000' }
+  const response = await api.search({
+    ...params
+  })
+  
+  return {
+    data: response.list,
+    total: response.total
+  }
+}
+</script>
+```
+
+**说明**：
+- 左侧为字段选择器（select），右侧为对应的输入框
+- 默认选中 `dynamicFields` 中的第一个字段
+- 搜索时，参数格式为 `{ 'colKey.fieldKey': value }`，例如 `{ 'dynamicSearch.name': '张三' }`
+- 切换字段时，输入框的值会自动清空
 
 ### 数据请求方法
 

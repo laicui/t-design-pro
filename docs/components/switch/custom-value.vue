@@ -3,13 +3,17 @@
     <div class="demo-item">
       <p class="demo-label">数字值开关 (1/0)：</p>
       <SwitchPro v-model="numberValue" :custom-value="[1, 0]" />
-      <span class="demo-value">当前值：{{ numberValue }} (类型: {{ typeof numberValue }})</span>
+      <span class="demo-value"
+        >当前值：{{ numberValue }} (类型: {{ typeof numberValue }})</span
+      >
     </div>
 
     <div class="demo-item">
       <p class="demo-label">字符串值开关 ('on'/'off')：</p>
       <SwitchPro v-model="stringValue" :custom-value="['on', 'off']" />
-      <span class="demo-value">当前值：{{ stringValue }} (类型: {{ typeof stringValue }})</span>
+      <span class="demo-value"
+        >当前值：{{ stringValue }} (类型: {{ typeof stringValue }})</span
+      >
     </div>
 
     <div class="demo-item">
@@ -41,7 +45,9 @@ const customAsyncValue = ref<SwitchValue>('inactive')
 const handleCustomRequest = (): Promise<boolean> => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      MessagePlugin.success(`状态将切换为: ${customAsyncValue.value === 'active' ? 'inactive' : 'active'}`)
+      MessagePlugin.success(
+        `状态将切换为: ${customAsyncValue.value === 'active' ? 'inactive' : 'active'}`
+      )
       resolve(true)
     }, 800)
   })

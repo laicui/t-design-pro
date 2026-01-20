@@ -1,7 +1,11 @@
 <template>
   <div>
     <h2>异步Switch调试</h2>
-    <SwitchPro :model-value="booleanValue" :request="request" @change="onChange" />
+    <SwitchPro
+      :model-value="booleanValue"
+      :request="request"
+      @change="onChange"
+    />
     <p>当前值：{{ booleanValue }}</p>
 
     <h2>非异步Switch调试 custom-value="[1, 0]"</h2>

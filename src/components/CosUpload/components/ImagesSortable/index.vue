@@ -1,19 +1,31 @@
 <template>
   <div class="sortable-container">
-    <ul ref="sortableRef" class="sortable-card" :class="sorting ? 'sorting' : ''">
+    <ul
+      ref="sortableRef"
+      class="sortable-card"
+      :class="sorting ? 'sorting' : ''"
+    >
       <li
         v-for="(item, index) in displayFiles"
         :key="item.url || item.name"
         class="sortable-item"
         :class="disabled ? 'disabled' : ''"
       >
-        <t-loading size="small" :loading="item.status === 'progress'" show-overlay>
+        <t-loading
+          size="small"
+          :loading="item.status === 'progress'"
+          show-overlay
+        >
           <div class="sortable-item-content">
             <img class="sortable-item-content-img" :src="item.url" />
             <div class="sortable-item-content-mask">
               <t-space align="center" size="0" style="cursor: pointer">
                 <browse-icon class="icon-button" @click="openPreview(index)" />
-                <delete-icon v-if="!disabled" class="icon-button" @click="deleteItem(index)" />
+                <delete-icon
+                  v-if="!disabled"
+                  class="icon-button"
+                  @click="deleteItem(index)"
+                />
                 <slot name="imageCoverIcon" :item="item"></slot>
                 <template #separator>
                   <t-divider layout="vertical" />

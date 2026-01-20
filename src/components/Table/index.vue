@@ -15,7 +15,11 @@
     <div class="table-card">
       <!-- 表格头部扩展插槽 -->
       <div
-        v-if="slots.tableHeaderCenter || slots.tableHeaderLeft || slots.tableHeaderRight"
+        v-if="
+          slots.tableHeaderCenter ||
+          slots.tableHeaderLeft ||
+          slots.tableHeaderRight
+        "
         ref="tableHeaderRowRef"
       >
         <t-row v-if="slots.tableHeaderCenter" class="table-header-row">
@@ -66,7 +70,16 @@ import {
   TableChangeData,
   TableInstanceFunctions
 } from 'tdesign-vue-next'
-import { computed, nextTick, onMounted, reactive, ref, toRaw, useSlots, watch } from 'vue'
+import {
+  computed,
+  nextTick,
+  onMounted,
+  reactive,
+  ref,
+  toRaw,
+  useSlots,
+  watch
+} from 'vue'
 
 import searchForm from './searchForm.vue'
 import type { ProTableProps, ProTablePropsOmitKey } from './types.ts'
@@ -162,7 +175,8 @@ const formatColumns = computed(() => {
           ...item,
           cell: (h, props) => {
             if (item.cellContentEnum && props.col.colKey) {
-              const enumValue = item.cellContentEnum[props.row[props.col.colKey]]
+              const enumValue =
+                item.cellContentEnum[props.row[props.col.colKey]]
               if (enumValue !== undefined && enumValue !== null) {
                 return enumValue
               }
@@ -199,12 +213,15 @@ const request = async (params?: { [key: string]: any }) => {
   try {
     loading.value = true
 
+    // 处理搜索表单数据，将动态字段格式化为扁平结构
+    const searchParams = formatSearchFormData(toRaw(searchFormData.value))
+
     const requestParams: {
       [key: string]: any
     } = {
       ...props.sort,
       ...props.extendParams,
-      ...toRaw(searchFormData.value),
+      ...searchParams,
       ...params
     }
 
@@ -235,9 +252,49 @@ const request = async (params?: { [key: string]: any }) => {
   }
 }
 
+// 格式化搜索表单数据，将动态字段转换为扁平结构
+const formatSearchFormData = (formData: { [key: string]: any }) => {
+  const result: { [key: string]: any } = {}
+
+  for (const key in formData) {
+    const value = formData[key]
+
+    // 检查是否是动态字段（包含 fieldKey 和 value 属性）
+    if (
+      value &&
+      typeof value === 'object' &&
+      'fieldKey' in value &&
+      'value' in value
+    ) {
+      // 将动态字段格式化为 { fieldKey: value } 的扁平结构
+      // 过滤空值，避免发送空字符串参数
+      if (
+        value.fieldKey &&
+        value.value !== '' &&
+        value.value !== undefined &&
+        value.value !== null
+      ) {
+        result[value.fieldKey] = value.value
+      }
+    } else if (value !== '' && value !== undefined && value !== null) {
+      // 过滤空值，避免发送空字符串参数
+      result[key] = value
+    }
+  }
+
+  return result
+}
+
 // 分页、排序、过滤等发生变化时会触发 change 事件
-const onChange = (changeParams: TableChangeData, { trigger }: TableChangeContext<any>) => {
-  console.log('分页、排序、过滤等发生变化时会触发 change 事件：', changeParams, trigger)
+const onChange = (
+  changeParams: TableChangeData,
+  { trigger }: TableChangeContext<any>
+) => {
+  console.log(
+    '分页、排序、过滤等发生变化时会触发 change 事件：',
+    changeParams,
+    trigger
+  )
   switch (trigger) {
     case 'filter':
     case 'sorter':
@@ -260,7 +317,9 @@ onMounted(async () => {
   await nextTick()
   if (renderSearchForm.value) {
     // 获取初始搜索表单数据
-    const initSearchFormData = getInitSearchFormData(toRaw(searchFormItems.value))
+    const initSearchFormData = getInitSearchFormData(
+      toRaw(searchFormItems.value)
+    )
     searchFormData.value = initSearchFormData
     request(initSearchFormData)
     return
@@ -269,7 +328,9 @@ onMounted(async () => {
   request()
 })
 
-const tableRef = ref<(TableInstanceFunctions & EnhancedTableInstanceFunctions) | null>(null)
+const tableRef = ref<
+  (TableInstanceFunctions & EnhancedTableInstanceFunctions) | null
+>(null)
 const refresh = () => {
   // 刷新表格，不重置分页页码
   request()

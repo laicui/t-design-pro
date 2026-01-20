@@ -13,7 +13,13 @@ export interface UploadFileOptions {
   onProgress?: (progressInfo: COS.ProgressInfo) => void
 }
 
-type omitOssOptions = 'Bucket' | 'Body' | 'Region' | 'Key' | 'Headers' | 'onProgress'
+type omitOssOptions =
+  | 'Bucket'
+  | 'Body'
+  | 'Region'
+  | 'Key'
+  | 'Headers'
+  | 'onProgress'
 
 export interface ICosUploadProps {
   modelValue?: Array<any>

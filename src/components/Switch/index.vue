@@ -14,7 +14,11 @@ import { ref } from 'vue'
 
 import { SwitchProProps } from './types'
 
-const { modelValue, request, customValue = [true, false] } = defineProps<SwitchProProps>()
+const {
+  modelValue,
+  request,
+  customValue = [true, false]
+} = defineProps<SwitchProProps>()
 
 const emit = defineEmits<{
   change: [value: SwitchValue]

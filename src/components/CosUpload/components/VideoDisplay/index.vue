@@ -19,8 +19,16 @@
         <div class="mask">
           <t-space align="center" size="0">
             <browse-icon class="icon-button" @click="openPreview()" />
-            <file-image-icon v-if="!disabled" class="icon-button" @click="openSelectPoster()" />
-            <delete-icon v-if="!disabled" class="icon-button" @click="deleteFile()" />
+            <file-image-icon
+              v-if="!disabled"
+              class="icon-button"
+              @click="openSelectPoster()"
+            />
+            <delete-icon
+              v-if="!disabled"
+              class="icon-button"
+              @click="deleteFile()"
+            />
             <template #separator>
               <t-divider layout="vertical" />
             </template>
@@ -60,13 +68,22 @@
       @closed="onClosedSelectPoster"
       @confirm="confirmPoster"
     >
-      <t-loading size="small" style="min-height: 290px" :loading="gettingScreenshot" show-overlay>
+      <t-loading
+        size="small"
+        style="min-height: 290px"
+        :loading="gettingScreenshot"
+        show-overlay
+      >
         <div v-if="currentSelectedPoster.length > 0" class="poster-preview">
           <img :src="currentSelectedPoster[0].url" />
         </div>
         <div v-if="screenshotImages.length > 0" class="screenshot-control">
           <div class="screenshot-container">
-            <img v-for="item in screenshotImages" :key="item.key" :src="item.url" />
+            <img
+              v-for="item in screenshotImages"
+              :key="item.key"
+              :src="item.url"
+            />
           </div>
           <duration-slider
             v-model="currentDuration"
@@ -137,7 +154,9 @@ const transformBlobToFilesObject = (blobData) => {
   const filename = `${uuidv4()}.jpeg`
   const file = new File([blobData], filename, { type: blobData.type })
   const { lastModified, name, size, type } = file
-  return [{ lastModified, name, size, type, raw: file, status: 'waiting', percent: 0 }]
+  return [
+    { lastModified, name, size, type, raw: file, status: 'waiting', percent: 0 }
+  ]
 }
 
 const initPoster = async (video) => {
@@ -167,7 +186,9 @@ const onClosedSelectPoster = () => {
 }
 
 const confirmPoster = () => {
-  const posterFiles = transformBlobToFilesObject(currentSelectedPoster.value[0].Body)
+  const posterFiles = transformBlobToFilesObject(
+    currentSelectedPoster.value[0].Body
+  )
   emit('updatePoster', posterFiles)
   visibleSelectPoster.value = false
 }

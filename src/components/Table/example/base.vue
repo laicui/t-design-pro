@@ -22,7 +22,9 @@
     </TablePro>
     <div style="margin: 20px 0">
       <t-button @click="selectFirstTwo">选中前两行</t-button>
-      <t-button @click="clearSelection" style="margin-left: 8px">清空选择</t-button>
+      <t-button @click="clearSelection" style="margin-left: 8px"
+        >清空选择</t-button
+      >
       <span style="margin-left: 16px">已选ID: {{ selectedRowKeys }}</span>
     </div>
   </div>

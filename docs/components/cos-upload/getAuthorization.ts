@@ -7,7 +7,11 @@
  * 3. 处理错误和重试逻辑
  */
 
-export default async function getAuthorization(options: any, callback: Function) {
+export default async function getAuthorization(
+  _options: any,
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+  callback: Function
+) {
   // 示例：模拟从后端获取临时密钥
   // 实际项目中，请替换为真实的后端接口
 
@@ -62,6 +66,7 @@ export class AuthorizationManager {
   private cache: any = null
   private cacheExpireTime: number = 0
 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
   async getAuthorization(options: any, callback: Function) {
     // 检查缓存是否有效
     const now = Math.floor(Date.now() / 1000)
@@ -91,7 +96,7 @@ export class AuthorizationManager {
     }
   }
 
-  private async fetchCredentials(options: any) {
+  private async fetchCredentials(_options: any) {
     // 实际的后端接口调用
     // return await fetch('/api/cos/sts', { ... })
 

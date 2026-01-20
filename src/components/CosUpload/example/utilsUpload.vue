@@ -7,7 +7,12 @@
         <p v-if="inputLoading">正在上传</p>
         <div v-if="imageSrc">
           <img
-            style="width: 100px; height: 100px; object-fit: cover; margin-top: 10px"
+            style="
+              width: 100px;
+              height: 100px;
+              object-fit: cover;
+              margin-top: 10px;
+            "
             :src="imageSrc"
             alt=""
           />

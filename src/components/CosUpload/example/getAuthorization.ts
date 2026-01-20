@@ -1,6 +1,9 @@
 const Bucket = import.meta.env.VITE_COS_BUCKET
 const token = import.meta.env.VITE_TOKEN
-import { GetAuthorizationCallbackParams, GetAuthorizationOptions } from 'cos-js-sdk-v5'
+import {
+  GetAuthorizationCallbackParams,
+  GetAuthorizationOptions
+} from 'cos-js-sdk-v5'
 import localForage from 'localforage'
 import { MessagePlugin } from 'tdesign-vue-next'
 const getAuthorization = (
@@ -24,7 +27,8 @@ const getAuthorization = (
       fetch(URL, {
         headers: {
           Authorization: `Bearer ${token}`,
-          'request-origin': import.meta.env.VITE_SERVICE_CENTER_API_REQUEST_ORIGIN // 公共服务接口，请求需携带来源
+          'request-origin': import.meta.env
+            .VITE_SERVICE_CENTER_API_REQUEST_ORIGIN // 公共服务接口，请求需携带来源
         }
       })
         .then((response) => response.json())

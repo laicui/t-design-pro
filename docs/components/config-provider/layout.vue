@@ -22,7 +22,9 @@
           </t-form-item>
           <t-form-item>
             <t-space>
-              <t-button theme="primary">{{ t('common.button.search') }}</t-button>
+              <t-button theme="primary">{{
+                t('common.button.search')
+              }}</t-button>
               <t-button>{{ t('common.button.reset') }}</t-button>
             </t-space>
           </t-form-item>

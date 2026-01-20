@@ -65,9 +65,15 @@ export default async (cosOptions: uploadFileToCosOptions, file: File) => {
     }
     if (file.type.startsWith('video/')) {
       const baseData: any = await getMediaInfo(cos, Key, Bucket, Region)
-      data.width = Number(baseData?.Response?.MediaInfo?.Stream?.Video?.Width || 0)
-      data.height = Number(baseData?.Response?.MediaInfo?.Stream?.Video?.Height || 0)
-      data.duration = Number(baseData?.Response?.MediaInfo?.Stream?.Video?.Duration || 0)
+      data.width = Number(
+        baseData?.Response?.MediaInfo?.Stream?.Video?.Width || 0
+      )
+      data.height = Number(
+        baseData?.Response?.MediaInfo?.Stream?.Video?.Height || 0
+      )
+      data.duration = Number(
+        baseData?.Response?.MediaInfo?.Stream?.Video?.Duration || 0
+      )
     }
 
     const url = await getObjectUrl(cos, Key, Bucket, Region)

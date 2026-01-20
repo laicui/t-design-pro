@@ -49,7 +49,10 @@ const displayFiles = computed(() => {
 const formatName = (name: string) => {
   if (props.abridgeName && props.abridgeName.length === 2) {
     const halfLength = name.length / 2
-    if (props.abridgeName[0] < halfLength && props.abridgeName[1] < halfLength) {
+    if (
+      props.abridgeName[0] < halfLength &&
+      props.abridgeName[1] < halfLength
+    ) {
       const startStr = name.slice(0, props.abridgeName[0])
       const endStr = name.slice(-props.abridgeName[1], name.length)
       return `${startStr}...${endStr}`

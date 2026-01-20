@@ -18,7 +18,13 @@
       @waiting-upload-files-change="waitingUploadFilesChange"
       @success="uploadSuccess"
     >
-      <template v-if="theme === 'image-sortable' || theme === 'video' || theme === 'files-list'">
+      <template
+        v-if="
+          theme === 'image-sortable' ||
+          theme === 'video' ||
+          theme === 'files-list'
+        "
+      >
         <t-button
           v-if="theme === 'image-sortable' && !disabled"
           :disabled="disabled || (max > 0 && value.length >= max)"
@@ -31,7 +37,10 @@
           <template #icon><upload-icon /></template>
           {{ value.length === 0 ? `选择视频` : '重新选择' }}
         </t-button>
-        <t-button v-if="theme === 'files-list' && !disabled" :loading="uploading">
+        <t-button
+          v-if="theme === 'files-list' && !disabled"
+          :loading="uploading"
+        >
           <template #icon><upload-icon /></template>
           <slot name="filesListButtonTitle">上传文件</slot>
         </t-button>
@@ -40,11 +49,18 @@
         <slot></slot>
       </template>
       <template
-        v-if="theme === 'image-sortable' || theme === 'video' || theme === 'files-list'"
+        v-if="
+          theme === 'image-sortable' ||
+          theme === 'video' ||
+          theme === 'files-list'
+        "
         #fileListDisplay
       >
         <images-sortable
-          v-if="theme === 'image-sortable' && (value.length > 0 || waitingUploadFiles.length > 0)"
+          v-if="
+            theme === 'image-sortable' &&
+            (value.length > 0 || waitingUploadFiles.length > 0)
+          "
           :files="value"
           :disabled="disabled"
           :waiting-upload-files="waitingUploadFiles"
@@ -53,11 +69,17 @@
           @sort-end="sortEnd"
         >
           <template #imageCoverIcon="{ item }">
-            <component :is="($slots as any).imageCoverIcon" :item="item"></component>
+            <component
+              :is="($slots as any).imageCoverIcon"
+              :item="item"
+            ></component>
           </template>
         </images-sortable>
         <video-display
-          v-if="theme === 'video' && (value.length > 0 || waitingUploadFiles.length > 0)"
+          v-if="
+            theme === 'video' &&
+            (value.length > 0 || waitingUploadFiles.length > 0)
+          "
           :files="value"
           :poster="poster"
           :disabled="disabled"
@@ -66,7 +88,10 @@
           @update-poster="updatePoster"
         />
         <files-list
-          v-if="theme === 'files-list' && (value.length > 0 || waitingUploadFiles.length > 0)"
+          v-if="
+            theme === 'files-list' &&
+            (value.length > 0 || waitingUploadFiles.length > 0)
+          "
           :files="value"
           :disabled="disabled"
           :waiting-upload-files="waitingUploadFiles"
@@ -104,7 +129,9 @@ import ImagesSortable from './components/ImagesSortable/index.vue'
 import VideoDisplay from './components/VideoDisplay/index.vue'
 import CosInstance from './CosInstance'
 
-const uploadRef = ref<(InstanceType<typeof Upload> & UploadInstanceFunctions) | null>(null)
+const uploadRef = ref<
+  (InstanceType<typeof Upload> & UploadInstanceFunctions) | null
+>(null)
 const uploading = ref(false)
 import type { ICosUploadProps } from './types'
 const props = withDefaults(defineProps<ICosUploadProps>(), {
@@ -121,7 +148,12 @@ defineOptions({
 // 实例化COS
 const COSUtil = new CosInstance(props.cosOptions)
 
-const emit = defineEmits(['update:modelValue', 'updatePoster', 'uploadSuccess', 'update:loading'])
+const emit = defineEmits([
+  'update:modelValue',
+  'updatePoster',
+  'uploadSuccess',
+  'update:loading'
+])
 
 const value = computed({
   get() {
@@ -139,7 +171,11 @@ const value = computed({
   set(value) {
     emit(
       'update:modelValue',
-      value.map((item) => ({ ...item.response, status: undefined, uploadTime: undefined }))
+      value.map((item) => ({
+        ...item.response,
+        status: undefined,
+        uploadTime: undefined
+      }))
     )
   }
 })
@@ -174,7 +210,13 @@ const waitingUploadFilesChange = ({ files }) => {
   waitingUploadFiles.value = files
 }
 
-type ThemeType = 'file' | 'custom' | 'image' | 'file-input' | 'file-flow' | 'image-flow'
+type ThemeType =
+  | 'file'
+  | 'custom'
+  | 'image'
+  | 'file-input'
+  | 'file-flow'
+  | 'image-flow'
 
 const fileType = ['image-sortable', 'video', 'files-list', 'audio']
 
@@ -245,7 +287,10 @@ const requestMethod: any = async (file) => {
   const contentDisposition = handleOssExtendOptions.ContentDisposition
   if (contentDisposition) {
     // 如果没传filename 则自动根据文件名拼接
-    if (contentDisposition.includes('attachment') && !contentDisposition.includes('filename')) {
+    if (
+      contentDisposition.includes('attachment') &&
+      !contentDisposition.includes('filename')
+    ) {
       // 在safari中，不会对filename进行解码，这里filename*可兼容safari
       // 当有filename*时，优先使用filename* 都不存在时，浏览器默认取URL中的后缀作为文件名。
       handleOssExtendOptions.ContentDisposition += `filename=${encodeURIComponent(
@@ -288,7 +333,11 @@ const deleteItem = (index: number) => {
 }
 
 const sortEnd = (sortEvt: { oldIndex: number; newIndex: number }) => {
-  const filesList = arrayMoveImmutable(value.value, sortEvt.oldIndex, sortEvt.newIndex)
+  const filesList = arrayMoveImmutable(
+    value.value,
+    sortEvt.oldIndex,
+    sortEvt.newIndex
+  )
   emit(
     'update:modelValue',
     filesList.map((item) => item.response)
@@ -312,7 +361,9 @@ defineExpose({
   uploadFiles
 })
 const hideUploadTrigger = computed(() => (props.disabled ? 'none' : 'block'))
-const sortableContainerMargin = computed(() => (props.disabled ? '0' : 'var(--td-comp-margin-l)'))
+const sortableContainerMargin = computed(() =>
+  props.disabled ? '0' : 'var(--td-comp-margin-l)'
+)
 </script>
 
 <style lang="less" scoped>

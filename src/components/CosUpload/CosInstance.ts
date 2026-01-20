@@ -12,7 +12,12 @@ export default class CosInstance {
   getAuthorization: COS.COSOptions['getAuthorization']
 
   constructor(options: CreateCosInstanceOptions) {
-    if (!options || !options.Bucket || !options.Region || !options.getAuthorization) {
+    if (
+      !options ||
+      !options.Bucket ||
+      !options.Region ||
+      !options.getAuthorization
+    ) {
       console.log(options)
 
       throw new Error('请传入完整的cosOptions参数')
@@ -38,7 +43,11 @@ export default class CosInstance {
       const Key = options.path + saveName
       // 如果是图片资源，生成压缩参数
       const PicOperations = () => {
-        return this.getPicOperations(file.type!, saveName, options.pictureHandleRule || '')
+        return this.getPicOperations(
+          file.type!,
+          saveName,
+          options.pictureHandleRule || ''
+        )
       }
       console.log(this.Bucket)
 
@@ -80,13 +89,21 @@ export default class CosInstance {
         key: Key,
         md5: result.ETag,
         width: Number(result?.UploadResult?.ProcessResults?.Object?.Width || 0),
-        height: Number(result?.UploadResult?.ProcessResults?.Object?.Height || 0)
+        height: Number(
+          result?.UploadResult?.ProcessResults?.Object?.Height || 0
+        )
       }
       if (options.file.type?.startsWith('video/')) {
         const baseData: any = await this.getMediaInfo(Key)
-        data.width = Number(baseData?.Response?.MediaInfo?.Stream?.Video?.Width || 0)
-        data.height = Number(baseData?.Response?.MediaInfo?.Stream?.Video?.Height || 0)
-        data.duration = Number(baseData?.Response?.MediaInfo?.Stream?.Video?.Duration || 0)
+        data.width = Number(
+          baseData?.Response?.MediaInfo?.Stream?.Video?.Width || 0
+        )
+        data.height = Number(
+          baseData?.Response?.MediaInfo?.Stream?.Video?.Height || 0
+        )
+        data.duration = Number(
+          baseData?.Response?.MediaInfo?.Stream?.Video?.Duration || 0
+        )
       }
 
       const url = await this.getObjectUrl(Key)
@@ -208,7 +225,9 @@ export default class CosInstance {
             filename
               ? (() => {
                   const match = Key.match(/(?<=\.)\w+$/)
-                  return match ? `filename=${filename}.${match[0]}` : `filename=${filename}`
+                  return match
+                    ? `filename=${filename}.${match[0]}`
+                    : `filename=${filename}`
                 })()
               : ''
           }` // 补充强制下载的参数并重命名下载后的文件

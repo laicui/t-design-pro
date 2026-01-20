@@ -10,8 +10,43 @@
       @submit="onSubmit"
     >
       <t-row :gutter="[16, 16]" justify="space-between">
-        <t-col v-for="formItemCol in formItemCols" :key="formItemCol.key" :span="formItemColSpan">
+        <t-col
+          v-for="formItemCol in formItemCols"
+          :key="formItemCol.key"
+          :span="formItemColSpan"
+        >
+          <!-- 动态字段表单项 -->
           <t-form-item
+            v-if="formItemCol.dynamicFields"
+            :label-width="0"
+            :label="''"
+            :name="formItemCol.key"
+          >
+            <t-input-adornment
+              :prepend="getDynamicFieldSelect(formItemCol)"
+              style="width: 100%"
+            >
+              <component
+                :is="
+                  getDynamicComponentType(
+                    formItemCol,
+                    formData[formItemCol.key].fieldKey
+                  )
+                "
+                v-model="formData[formItemCol.key].value"
+                v-bind="
+                  getDynamicFieldProps(
+                    formItemCol,
+                    formData[formItemCol.key].fieldKey
+                  )
+                "
+              />
+            </t-input-adornment>
+          </t-form-item>
+
+          <!-- 普通表单项 -->
+          <t-form-item
+            v-else
             :label-width="formItemCol.labelWidth || 'auto'"
             :label="formItemCol.label"
             :name="formItemCol.key"
@@ -19,7 +54,8 @@
             <component
               :is="
                 typeof formItemCol.valueType === 'string'
-                  ? componentMap[formItemCol.valueType] || componentMap['t-input']
+                  ? componentMap[formItemCol.valueType] ||
+                    componentMap['t-input']
                   : formItemCol.valueType
               "
               v-model="formData[formItemCol.key]"
@@ -27,7 +63,11 @@
             />
           </t-form-item>
         </t-col>
-        <t-col :span="formItemColSpan" :offset="operationSpanOffset" class="operation-container">
+        <t-col
+          :span="formItemColSpan"
+          :offset="operationSpanOffset"
+          class="operation-container"
+        >
           <t-space :size="16" align="center">
             <t-button
               theme="primary"
@@ -58,7 +98,7 @@
     </t-form>
   </div>
 </template>
-<script setup lang="tsx">
+<script setup lang="ts">
 import { useElementSize } from '@vueuse/core'
 import {
   Button as TButton,
@@ -71,13 +111,14 @@ import {
   FormResetParams,
   Icon as TIcon,
   Input as TInput,
+  InputAdornment as TInputAdornment,
   Link as TLink,
   Row as TRow,
   Select as TSelect,
   Space as TSpace
 } from 'tdesign-vue-next'
 import type { VNode } from 'vue'
-import { computed, ref, watchEffect } from 'vue'
+import { computed, h, ref, watchEffect } from 'vue'
 
 import { useLocalLang } from '@/locales'
 
@@ -138,15 +179,21 @@ const colsCount = computed(() => {
 // 未展开的情况下，选项数量小于可放置数量，操作栏偏移量为数量差，否则为0
 const operationSpanOffset = computed(() => {
   if (showAllFormItem.value === false) {
-    return formItemColSpan.value * (colsCount.value - formItemCols.value.length - 1)
+    return (
+      formItemColSpan.value * (colsCount.value - formItemCols.value.length - 1)
+    )
   }
   return (
-    (colsCount.value - (formItemCols.value.length % colsCount.value) - 1) * formItemColSpan.value
+    (colsCount.value - (formItemCols.value.length % colsCount.value) - 1) *
+    formItemColSpan.value
   )
 })
 
 watchEffect(() => {
-  if (showAllFormItem.value && colsCount.value - 1 >= formItemCols.value.length) {
+  if (
+    showAllFormItem.value &&
+    colsCount.value - 1 >= formItemCols.value.length
+  ) {
     showAllFormItem.value = false
   }
 })
@@ -154,15 +201,35 @@ watchEffect(() => {
 const formItemCols = computed(() => {
   return props.formItems
     ? props.formItems
-        .filter((_, index) => showAllFormItem.value === true || index < colsCount.value - 1)
+        .filter(
+          (_, index) =>
+            showAllFormItem.value === true || index < colsCount.value - 1
+        )
         .map((item) => {
           let valueType: SearchValueType | VNode = 't-input'
           const fieldProps: { [key: string]: any } = {
             clearable: true,
             placeholder: getPlaceholder(item)
           }
+
           if (typeof item.search === 'object') {
             Object.assign(fieldProps, item.search.fieldProps || {})
+
+            // 处理动态字段配置
+            if (
+              item.search.dynamicFields &&
+              item.search.dynamicFields.length > 0
+            ) {
+              const searchKey = item.search.key || item.colKey
+
+              return {
+                ...item.search,
+                key: searchKey,
+                label: item.search.label || transformTitleToLabel(item.title),
+                dynamicFields: item.search.dynamicFields
+              }
+            }
+
             if (item.search.render) {
               valueType = item.search.render()
             } else {
@@ -178,13 +245,7 @@ const formItemCols = computed(() => {
               }
               if (valueType === 't-date-range-picker') {
                 fieldProps.enableTimePicker = true
-                formData.value[item.search.key || item.colKey] = []
               }
-            }
-
-            // 设置默认值
-            if (fieldProps.defaultValue) {
-              formData.value[item.search.key || item.colKey] = fieldProps.defaultValue
             }
 
             return {
@@ -246,6 +307,88 @@ const onSubmit = () => {
 
 const restSearchForm = (params?: FormResetParams<any>) => {
   formSearchRef.value?.reset(params)
+}
+
+// 获取动态字段的组件类型
+const getDynamicComponentType = (formItemCol: any, fieldKey: string) => {
+  const field = formItemCol.dynamicFields?.find((f: any) => f.key === fieldKey)
+  if (!field) return componentMap['t-input']
+
+  if (typeof field.valueType === 'string') {
+    return componentMap[field.valueType] || componentMap['t-input']
+  }
+  return field.valueType || componentMap['t-input']
+}
+
+// 获取动态字段的属性
+const getDynamicFieldProps = (formItemCol: any, fieldKey: string) => {
+  const field = formItemCol.dynamicFields?.find((f: any) => f.key === fieldKey)
+  if (!field) return {}
+
+  const fieldProps: { [key: string]: any } = {
+    clearable: true,
+    placeholder: getDynamicPlaceholder(formItemCol, field)
+  }
+
+  Object.assign(fieldProps, field.fieldProps || {})
+
+  if (field.valueEnum) {
+    const { valueEnum } = field
+    fieldProps.options = Object.keys(valueEnum).map((key) => ({
+      value: key,
+      label: valueEnum[key]
+    }))
+  }
+
+  if (field.valueType === 't-date-range-picker') {
+    fieldProps.enableTimePicker = true
+  }
+
+  return fieldProps
+}
+
+// 获取动态字段的占位符
+const getDynamicPlaceholder = (formItemCol: any, field: any) => {
+  if (field.fieldProps?.placeholder) {
+    return field.fieldProps.placeholder
+  }
+
+  switch (field.valueType) {
+    case 't-date-range-picker':
+      return [
+        `${t('components.select.date.time.start')}`,
+        `${t('components.select.date.time.end')}`
+      ]
+    case 't-date-picker':
+      return `${t('components.select.date.time.tips')}`
+    case 't-select':
+      return `${t('common.select.tips')}${field.label || formItemCol.label}`
+    default:
+      return `${t('common.input.tips')}${field.label || formItemCol.label}`
+  }
+}
+
+// 动态字段切换时的处理
+const onDynamicFieldChange = (formItemColKey: string) => {
+  // 重置当前字段的值
+  formData.value[formItemColKey].value = ''
+}
+
+// 获取动态字段的选择器组件
+const getDynamicFieldSelect = (formItemCol: any) => {
+  return () =>
+    h(TSelect, {
+      value: formData.value[formItemCol.key].fieldKey,
+      onChange: (value: any) => {
+        formData.value[formItemCol.key].fieldKey = value
+        onDynamicFieldChange(formItemCol.key)
+      },
+      options: formItemCol.dynamicFields.map((field: any) => ({
+        value: field.key,
+        label: field.label
+      })),
+      autoWidth: true
+    })
 }
 
 defineExpose({

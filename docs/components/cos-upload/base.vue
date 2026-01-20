@@ -3,7 +3,11 @@
     <t-space style="width: 100%" direction="vertical" :size="40">
       <div class="demo-section">
         <h4>文件上传（默认主题）</h4>
-        <CosUpload v-model="fileValue" path="/demo/files/" :cos-options="cosOptions" />
+        <CosUpload
+          v-model="fileValue"
+          path="/demo/files/"
+          :cos-options="cosOptions"
+        />
         <div class="demo-result">
           <p>已上传文件：</p>
           <pre>{{ JSON.stringify(fileValue, null, 2) }}</pre>
@@ -48,7 +52,10 @@ const { isDark } = useData()
 watch(
   isDark,
   (newVal) => {
-    document.documentElement.setAttribute('theme-mode', newVal ? 'dark' : 'light')
+    document.documentElement.setAttribute(
+      'theme-mode',
+      newVal ? 'dark' : 'light'
+    )
   },
   {
     immediate: true

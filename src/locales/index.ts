@@ -85,11 +85,15 @@ export function changeLocale(newLocale: string) {
 export const localeConfigKey = `lai-pro-locale`
 
 export function getCurrentLocale() {
-  return denormalizeLocale(useLocalStorage(localeConfigKey, 'zh-CN').value || defaultLocale)
+  return denormalizeLocale(
+    useLocalStorage(localeConfigKey, 'zh-CN').value || defaultLocale
+  )
 }
 
 const getCurrentLang = computed(() => {
-  const injectLang = getCurrentInstance() ? inject<Ref<string>>('lai-locale') : null
+  const injectLang = getCurrentInstance()
+    ? inject<Ref<string>>('lai-locale')
+    : null
   if (injectLang?.value) {
     return injectLang.value
   }
@@ -123,7 +127,9 @@ export function useLocalLang() {
         if (result && typeof result === 'object' && key in result) {
           result = result[key]
         } else {
-          console.warn(`Translation key "${path}" not found in language "${langCode}"`)
+          console.warn(
+            `Translation key "${path}" not found in language "${langCode}"`
+          )
           return path
         }
       }

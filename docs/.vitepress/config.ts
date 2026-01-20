@@ -29,8 +29,16 @@ export default defineConfig({
     },
     nav: [
       { text: '主页', link: '/' },
-      { text: '指南', link: '/guide/what-is-t-design-pro/', activeMatch: '/guide/' },
-      { text: '组件', link: '/components/table-pro/', activeMatch: '/components/' },
+      {
+        text: '指南',
+        link: '/guide/what-is-t-design-pro/',
+        activeMatch: '/guide/'
+      },
+      {
+        text: '组件',
+        link: '/components/table-pro/',
+        activeMatch: '/components/'
+      },
       {
         text: pkg.version,
         items: [
@@ -77,6 +85,8 @@ export default defineConfig({
       }
     },
 
-    socialLinks: [{ icon: 'github', link: 'https://github.com/laicui/t-design-pro' }]
+    socialLinks: [
+      { icon: 'github', link: 'https://github.com/laicui/t-design-pro' }
+    ]
   }
 })

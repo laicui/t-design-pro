@@ -30,7 +30,9 @@
           :poster="videoPoster"
           @update-poster="updateVideoPoster"
         />
-        <div v-if="videoLoading" class="loading-tip"><t-loading size="small" /> 视频上传中...</div>
+        <div v-if="videoLoading" class="loading-tip">
+          <t-loading size="small" /> 视频上传中...
+        </div>
       </div>
 
       <div class="demo-section">
@@ -123,7 +125,11 @@
 <script setup lang="ts">
 import { CosUpload } from 't-design-pro'
 import { CloudUploadIcon, RefreshIcon } from 'tdesign-icons-vue-next'
-import { Button as TButton, Loading as TLoading, Space as TSpace } from 'tdesign-vue-next'
+import {
+  Button as TButton,
+  Loading as TLoading,
+  Space as TSpace
+} from 'tdesign-vue-next'
 import { useData } from 'vitepress'
 import { ref, watch } from 'vue'
 
@@ -134,7 +140,10 @@ const { isDark } = useData()
 watch(
   isDark,
   (newVal) => {
-    document.documentElement.setAttribute('theme-mode', newVal ? 'dark' : 'light')
+    document.documentElement.setAttribute(
+      'theme-mode',
+      newVal ? 'dark' : 'light'
+    )
   },
   {
     immediate: true

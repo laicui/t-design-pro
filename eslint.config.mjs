@@ -7,7 +7,7 @@ import globals from 'globals'
 import tseslint from 'typescript-eslint'
 export default defineConfig([
   {
-    ignores: ['dist/', 'examples/', 'node_modules/']
+    ignores: ['dist/', 'examples/', 'node_modules/', 'docs/.vitepress/dist/', 'docs/.vitepress/cache/']
   },
   { files: ['**/*.{js,mjs,cjs,ts,mts,cts,vue}'], plugins: { js }, extends: ['js/recommended'] },
   { files: ['**/*.{js,mjs,cjs,ts,mts,cts,vue}'], languageOptions: { globals: globals.browser } },
@@ -31,6 +31,11 @@ export default defineConfig([
   },
   // 使eslint可检查prettier配置的规范
   eslintPluginPrettierRecommended,
+  {
+    rules: {
+      'prettier/prettier': ['error', { printWidth: 80 }]
+    }
+  },
   {
     plugins: {
       'simple-import-sort': simpleImportSort
