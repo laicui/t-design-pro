@@ -6,6 +6,13 @@
 并且本项目遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
 
+## [1.11.0](https://github.com/laicui/t-design-pro/compare/v1.10.1...v1.11.0) (2026-01-20)
+
+
+### ✨ 新功能
+
+* 优化组件代码格式，提升可读性和维护性 ([a91a393](https://github.com/laicui/t-design-pro/commit/a91a393c4ba95f8037c2a490c0436dd8189a209a))
+
 ### [1.10.1](https://github.com/laicui/t-design-pro/compare/v1.10.0...v1.10.1) (2025-11-03)
 
 
