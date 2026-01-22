@@ -1,13 +1,16 @@
 <template>
   <div>
-    <TButton @click="refresh">刷新</TButton>
     <TablePro
       ref="tableRef"
       :columns="columns"
       row-key="id"
       :loading="loading"
       :request="request"
-    ></TablePro>
+    >
+      <template #tableHeaderLeft>
+        <TButton @click="refresh">刷新</TButton>
+      </template>
+    </TablePro>
   </div>
 </template>
 

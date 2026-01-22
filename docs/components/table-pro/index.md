@@ -4,6 +4,7 @@ next: false
 
 <script setup>
 import BaseTable from './base.vue'
+import DynamicFields from './dynamic-fields.vue'
 import RequestTable from './request.vue'
 </script>
 
@@ -29,6 +30,16 @@ import RequestTable from './request.vue'
 
 ::: details 查看代码
 <<< ./base.vue
+:::
+
+## 动态字段搜索
+
+::: raw
+<DynamicFields />
+:::
+
+::: details 查看代码
+<<< ./dynamic-fields.vue
 :::
 
 ## 动态请求数据
@@ -230,6 +241,165 @@ const fetchData = async (params) => {
 - 默认选中 `dynamicFields` 中的第一个字段
 - 搜索时，参数格式为 `{ 'colKey.fieldKey': value }`，例如 `{ 'dynamicSearch.name': '张三' }`
 - 切换字段时，输入框的值会自动清空
+
+### 动态字段搜索（带默认值）
+
+```vue
+<script setup>
+const columns = [
+  {
+    title: '高级搜索',
+    colKey: 'advancedSearch',
+    search: {
+      // 设置默认选中的字段
+      defaultFieldKey: 'phone',
+      dynamicFields: [
+        {
+          key: 'name',
+          label: '姓名',
+          valueType: 't-input',
+          fieldProps: {
+            placeholder: '请输入姓名',
+            clearable: true
+          }
+        },
+        {
+          key: 'phone',
+          label: '手机号',
+          valueType: 't-input',
+          fieldProps: {
+            placeholder: '请输入手机号',
+            maxlength: 11
+          }
+        },
+        {
+          key: 'email',
+          label: '邮箱',
+          valueType: 't-input',
+          fieldProps: {
+            placeholder: '请输入邮箱'
+          }
+        },
+        {
+          key: 'status',
+          label: '状态',
+          valueType: 't-select',
+          valueEnum: {
+            '1': '启用',
+            '0': '禁用'
+          },
+          fieldProps: {
+            placeholder: '请选择状态'
+          }
+        }
+      ]
+    }
+  }
+]
+
+const fetchData = async (params) => {
+  // params 包含：{ 'advancedSearch.phone': '13800138000' }
+  const response = await api.search({
+    ...params
+  })
+
+  return {
+    data: response.list,
+    total: response.total
+  }
+}
+</script>
+```
+
+**说明**：
+- 使用 `defaultFieldKey` 指定默认选中的字段（示例中默认选中"手机号"）
+- 可以为每个字段配置独立的 `fieldProps`，如 `placeholder`、`maxlength` 等
+- 字段切换时，输入框的值会自动清空
+
+### 动态字段搜索（复杂场景）
+
+```vue
+<script setup>
+const columns = [
+  {
+    title: '综合搜索',
+    colKey: 'complexSearch',
+    search: {
+      dynamicFields: [
+        {
+          key: 'dateRange',
+          label: '时间范围',
+          valueType: 't-date-range-picker',
+          fieldProps: {
+            enableTimePicker: true,
+            format: 'YYYY-MM-DD HH:mm:ss'
+          }
+        },
+        {
+          key: 'amount',
+          label: '金额范围',
+          valueType: 't-input',
+          fieldProps: {
+            placeholder: '请输入金额',
+            type: 'number'
+          }
+        },
+        {
+          key: 'category',
+          label: '分类',
+          valueType: 't-select',
+          valueEnum: {
+            '1': '产品A',
+            '2': '产品B',
+            '3': '产品C'
+          }
+        },
+        {
+          key: 'region',
+          label: '地区',
+          valueType: 't-select',
+          valueEnum: {
+            'north': '华北',
+            'south': '华南',
+            'east': '华东',
+            'west': '西南'
+          }
+        }
+      ]
+    }
+  }
+]
+
+const fetchData = async (params) => {
+  // 处理不同字段类型的参数
+  const { current, pageSize, ...searchParams } = params
+
+  // 示例：处理日期范围
+  if (searchParams['complexSearch.dateRange']) {
+    const [startTime, endTime] = searchParams['complexSearch.dateRange']
+    searchParams.startTime = startTime
+    searchParams.endTime = endTime
+    delete searchParams['complexSearch.dateRange']
+  }
+
+  const response = await api.search({
+    page: current,
+    size: pageSize,
+    ...searchParams
+  })
+
+  return {
+    data: response.list,
+    total: response.total
+  }
+}
+</script>
+```
+
+**说明**：
+- 支持多种输入类型：日期范围、数字输入、选择器等
+- 可以根据业务需求自定义参数处理逻辑
+- 适用于需要灵活组合多种搜索条件的复杂场景
 
 ### 数据请求方法
 
